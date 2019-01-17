@@ -1,0 +1,14 @@
+<script>
+  export const href = '/';
+  export const className = '';
+
+  function handleRoute(e) {
+    e.preventDefault();
+    history.pushState({}, '', href);
+    console.log(href);
+    const popEvent = new Event('popstate');
+    window.dispatchEvent(popEvent);
+  }
+</script>
+
+<a href={href} class={className} on:click={handleRoute}><slot></slot></a>

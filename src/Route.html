@@ -1,0 +1,27 @@
+<script>
+  import { onMount } from 'svelte';
+  
+  export const path = '/';
+  export const component = undefined;
+
+  onMount(() => {
+    assignRoute();
+  });
+
+  function assignRoute() {
+    const svrouterGlobal = '__svrouter__';
+    
+    if (!window[svrouterGlobal]) {
+      window[svrouterGlobal] = {};
+    }
+
+    if (!window[svrouterGlobal].paths) {
+      window[svrouterGlobal].paths = [];
+    }
+
+    window[svrouterGlobal].paths.push({
+      path,
+      component
+    });
+  }
+</script>

@@ -1,0 +1,79 @@
+<script>
+  import { onMount } from 'svelte';
+
+  export const target = document.body;
+
+  onMount(() => {
+    handlePopState(0);
+  });
+
+  function updateComponent(route, params = {}) {
+    if (window['__svrouter__'].currentComponent && window['__svrouter__'].currentComponent.$destroy) {
+      window['__svrouter__'].currentComponent.$destroy();
+    }
+
+    window['__svrouter__'].currentComponent = new route.component({
+      target: document.body,
+      props: {
+        router: {
+          route,
+          params
+        }
+      }
+    });
+  }
+
+  function handlePopState(iteration) {
+    if (+iteration !== iteration) {
+      iteration = 0;
+    }
+
+    if (iteration > 10) {
+      throw Error('svrouter expects <Route> components. None given or <Route> components with error detected.');
+    }
+
+    if (!window['__svrouter__']) {
+      setTimeout(() => { handlePopState(iteration + 1) }, 16 + 1);
+      return;
+    }
+
+    window['__svrouter__'].paths.some((route) => {
+      if (route.path === window.location.pathname) {
+        updateComponent(route);
+        return true;
+      }
+
+      console.log(route.path, window.location.pathname);
+
+      if (route.path.includes(':')) {
+        const baseRegex = '[a-zA-Z0-9\-\_\+]+';
+        const replaceRegex = new RegExp(`:${baseRegex}`, 'g');
+        const pathRegex = new RegExp(`:(${baseRegex})`, 'g');
+        const path = route.path.replace(replaceRegex, `(${baseRegex})`) + '/?$';
+        const pathNumber = (route.path.match(replaceRegex) || []).length;
+        const regex = new RegExp(path, 'g');
+        const result = regex.exec(window.location.pathname) || [];
+        const resultPath = route.path.match(pathRegex).map(r => r.substr(1));
+        let params = {};
+
+        resultPath.forEach((r, i) => {
+          params[r] = result[i + 1];
+        });
+
+        if (result && result.length - 1 === pathNumber) {
+          updateComponent(route, params);
+          return true;
+        }
+      }
+
+      if (route.path === '*') {
+        updateComponent(route);
+        return true;
+      }
+    });
+  }
+</script>
+
+<svelte:window on:popstate={handlePopState}></svelte:window>
+
+<slot></slot>

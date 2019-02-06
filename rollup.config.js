@@ -10,7 +10,7 @@ export default {
 	output: {
 		sourcemap: true,
 		format: 'umd',
-		name: 'app',
+		name: 'svero',
 		file: 'public/svero.min.js'
 	},
 	plugins: [

@@ -1,10 +1,9 @@
-import App from './App.html';
+import Router from './Router.html';
+import Route from './Route.html';
+import Link from './Link.html';
 
-const app = new App({
-	target: document.body,
-	props: {
-		name: 'world'
-	}
-});
-
-export default app;
+export {
+  Router,
+  Route,
+  Link
+};

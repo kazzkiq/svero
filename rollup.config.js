@@ -9,9 +9,9 @@ export default {
 	input: 'src/main.js',
 	output: {
 		sourcemap: true,
-		format: 'iife',
+		format: 'umd',
 		name: 'app',
-		file: 'public/bundle.js'
+		file: 'public/svero.min.js'
 	},
 	plugins: [
 		svelte({
@@ -21,11 +21,6 @@ export default {
 
 			// enable run-time checks when not in production
 			dev: !production,
-			// we'll extract any component CSS out into
-			// a separate file — better for performance
-			css: css => {
-				css.write('public/bundle.css');
-			}
 		}),
 
 		// If you have external dependencies installed from

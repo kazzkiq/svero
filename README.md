@@ -42,6 +42,6 @@ A component loaded by a `<Route>` receives a property with route details:
 
 There is also an useful `<Link>` component that overrides `<a>` elements:
 
-```
+```html
 <Link href="path/here" className="btn">Hello!</Link>
 ```

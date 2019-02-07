@@ -15,6 +15,16 @@ If you're not familiar with the terms SPA, `pushState` or History API, you shoul
 <small>https://diveinto.html5doctor.com/history.html</small><br>
 <small>https://developer.mozilla.org/pt-BR/docs/Web/API/History</small><br>
 
+## Instalation
+
+Since it's exported in CommonJS format, you should be using it with a module bundler such as [Rollup](https://github.com/sveltejs/template/tree/v3) or Webpack.
+
+To install via npm:
+
+```
+npm install --save svero
+```
+
 ## Usage
 
 The usage is super simple:

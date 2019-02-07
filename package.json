@@ -1,6 +1,6 @@
 {
   "name": "svero",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Simple Router for Svelte 3",
   "main": "public/svero.min.js",
   "files": [
@@ -41,5 +41,8 @@
   "bugs": {
     "url": "https://github.com/kazzkiq/svero/issues"
   },
-  "homepage": "https://github.com/kazzkiq/svero"
+  "homepage": "https://github.com/kazzkiq/svero",
+  "dependencies": {
+    "path-parser": "^4.2.0"
+  }
 }

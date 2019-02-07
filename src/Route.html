@@ -9,17 +9,17 @@
   });
 
   function assignRoute() {
-    const svrouterGlobal = '__svrouter__';
+    const sveroGlobal = '__svero__';
     
-    if (!window[svrouterGlobal]) {
-      window[svrouterGlobal] = {};
+    if (!window[sveroGlobal]) {
+      window[sveroGlobal] = {};
     }
 
-    if (!window[svrouterGlobal].paths) {
-      window[svrouterGlobal].paths = [];
+    if (!window[sveroGlobal].paths) {
+      window[sveroGlobal].paths = [];
     }
 
-    window[svrouterGlobal].paths.push({
+    window[sveroGlobal].paths.push({
       path,
       component
     });

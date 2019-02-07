@@ -1,4 +1,5 @@
 <script>
+  import Path from 'path-parser'
   import { onMount } from 'svelte';
 
   export const target = document.body;
@@ -8,11 +9,11 @@
   });
 
   function updateComponent(route, params = {}) {
-    if (window['__svrouter__'].currentComponent && window['__svrouter__'].currentComponent.$destroy) {
-      window['__svrouter__'].currentComponent.$destroy();
+    if (window['__svero__'].currentComponent && window['__svero__'].currentComponent.$destroy) {
+      window['__svero__'].currentComponent.$destroy();
     }
 
-    window['__svrouter__'].currentComponent = new route.component({
+    window['__svero__'].currentComponent = new route.component({
       target: document.body,
       props: {
         router: {
@@ -24,46 +25,44 @@
   }
 
   function handlePopState(iteration) {
+    // TODO: Use more elegant approach (looping to see if a global __svero__ exists is ugly)
     if (+iteration !== iteration) {
       iteration = 0;
     }
 
     if (iteration > 10) {
-      throw Error('svrouter expects <Route> components. None given or <Route> components with error detected.');
+      throw Error('svero expects <Route> components. None given or <Route> components with error detected.');
     }
 
-    if (!window['__svrouter__']) {
+    if (!window['__svero__']) {
       setTimeout(() => { handlePopState(iteration + 1) }, 16 + 1);
       return;
     }
 
-    window['__svrouter__'].paths.some((route) => {
-      if (route.path === window.location.pathname) {
+    window['__svero__'].paths.some((route) => {
+      const browserPath = window.location.pathname;
+
+      // If route matches exactly the url path, load the component
+      // and stop the route checking
+      if (route.path === browserPath) {
         updateComponent(route);
         return true;
       }
       
+      // If route includes params, check if it matches with the URL
+      // and stop the route checking
       if (route.path.includes(':')) {
-        const baseRegex = '[a-zA-Z0-9\-\_\+]+';
-        const replaceRegex = new RegExp(`:${baseRegex}`, 'g');
-        const pathRegex = new RegExp(`:(${baseRegex})`, 'g');
-        const path = route.path.replace(replaceRegex, `(${baseRegex})`) + '/?$';
-        const pathNumber = (route.path.match(replaceRegex) || []).length;
-        const regex = new RegExp(path, 'g');
-        const result = regex.exec(window.location.pathname) || [];
-        const resultPath = route.path.match(pathRegex).map(r => r.substr(1));
-        let params = {};
+        const path = new Path(route.path);
+        const result = path.test(browserPath);
 
-        resultPath.forEach((r, i) => {
-          params[r] = result[i + 1];
-        });
-
-        if (result && result.length - 1 === pathNumber) {
-          updateComponent(route, params);
+        if (result) {
+          updateComponent(route, result);
           return true;
         }
       }
 
+      // If route is wildcard (*), fallbacks to the component
+      // and stop the route checking
       if (route.path === '*') {
         updateComponent(route);
         return true;

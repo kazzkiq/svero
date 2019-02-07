@@ -6,7 +6,7 @@
 
 ## First things first
 
-svero is intented for use in SPA (Single Page Applications) making usage of `pushState` and History API. We're assuming here that you already know how to configure your front-end server (being it dev or production) to serve all path requests to `index.html`.
+svero is intented to be used in SPA (Single Page Applications) making usage of `pushState` and History API. We're assuming that you already know how to configure your front-end server (being it dev or production) to serve all path requests to `index.html`.
 
 If you're not familiar with the terms SPA, `pushState` or History API, you should probably be reading these first:
 
@@ -17,7 +17,7 @@ If you're not familiar with the terms SPA, `pushState` or History API, you shoul
 
 ## Usage
 
-The usage is as simple as this:
+The usage is as super simple:
 
 ```html
 <!-- ./App.html -->
@@ -35,7 +35,7 @@ The usage is as simple as this:
 </Router>
 ```
 
-The `*` wildcard here simply works as a fallback. If a route fails to meet any other path, it then loads the path with the `*`, if it exists.
+The `*` wildcard simply works as a fallback. If a route fails to meet any other path, it then loads the path with the `*`. If there is no wildcard route and the route did not meet any other path, nothing is loaded.
 
 Paths with parameters (`:param`) are passed to components via props: `router.params`.
 

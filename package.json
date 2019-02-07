@@ -1,10 +1,11 @@
 {
   "name": "svero",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "description": "Simple Router for Svelte 3",
-  "main": "build/svero.min.js",
+  "main": "public/svero.min.js",
   "files": [
     "public/svero.min.js",
+    "public/svero.min.js.map",
     "README.md",
     "LICENSE"
   ],

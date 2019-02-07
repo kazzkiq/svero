@@ -9,7 +9,7 @@ export default {
 	input: 'src/main.js',
 	output: {
 		sourcemap: true,
-		format: 'umd',
+		format: 'cjs',
 		name: 'svero',
 		file: 'public/svero.min.js'
 	},

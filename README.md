@@ -17,7 +17,7 @@ If you're not familiar with the terms SPA, `pushState` or History API, you shoul
 
 ## Usage
 
-The usage is as super simple:
+The usage is super simple:
 
 ```html
 <!-- ./App.html -->

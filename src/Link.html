@@ -5,7 +5,6 @@
   function handleRoute(e) {
     e.preventDefault();
     history.pushState({}, '', href);
-    console.log(href);
     const popEvent = new Event('popstate');
     window.dispatchEvent(popEvent);
   }

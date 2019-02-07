@@ -42,9 +42,7 @@
         updateComponent(route);
         return true;
       }
-
-      console.log(route.path, window.location.pathname);
-
+      
       if (route.path.includes(':')) {
         const baseRegex = '[a-zA-Z0-9\-\_\+]+';
         const replaceRegex = new RegExp(`:${baseRegex}`, 'g');

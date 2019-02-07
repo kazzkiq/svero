@@ -1,70 +1,47 @@
-*Psst — looking for a shareable component template? Go here --> [sveltejs/component-template](https://github.com/sveltejs/component-template)*
+[![npm version](https://badge.fury.io/js/svero.svg)](https://www.npmjs.com/package/svero)
 
----
+<p align="center">
+  svero (<b>Sve</b>lte <b>Ro</b>uter): A simple router for Svelte 3.
+</p>
 
-# svelte app
 
-This is a project template for [Svelte](https://svelte.technology) apps. It lives at https://github.com/sveltejs/template.
+## Usage
 
-To create a new project based on this template using [degit](https://github.com/Rich-Harris/degit):
+The usage is as simple as this:
 
-```bash
-npm install -g degit # you only need to do this once
+```html
+<script>
+  import { Router, Route } from 'svero';
 
-degit sveltejs/template svelte-app
-cd svelte-app
+  import Index from './pages/Index.html';
+  import About from './pages/About.html';
+</script>
+
+<Router>
+  <Route path="*" component={Index} />
+  <Route path="/about" component={About} />
+  <Route path="/about/:who/123/:where" component={About} />
+</Router>
 ```
 
-*Note that you will need to have [Node.js](https://nodejs.org) installed.*
+The `*` wildcard here simply means fallback. If a route fails to meet any other path, it then loads the path with the `*`, if it exists.
 
+Paths with parameters (`:param`) are passed to components via `props.router.params`.
 
-## Get started
+A component loaded by a `<Route>` receives a property with route details:
 
-Install the dependencies...
+```html
+<script>
+  export const router = {};
 
-```bash
-cd svelte-app
-npm install
+  // Those contains useful information about current route status
+  router.route;
+  router.params;
+</script>
 ```
 
-...then start [Rollup](https://rollupjs.org):
+There is also an useful `<Link>` component that overrides `<a>` elements:
 
-```bash
-npm run dev
 ```
-
-Navigate to [localhost:5000](http://localhost:5000). You should see your app running. Edit a component file in `src`, save it, and reload the page to see your changes.
-
-
-## Deploying to the web
-
-### With [now](https://zeit.co/now)
-
-Install `now` if you haven't already:
-
-```bash
-npm install -g now
-```
-
-Then, from within your project folder:
-
-```bash
-now
-```
-
-As an alternative, use the [Now desktop client](https://zeit.co/download) and simply drag the unzipped project folder to the taskbar icon.
-
-### With [surge](https://surge.sh/)
-
-Install `surge` if you haven't already:
-
-```bash
-npm install -g surge
-```
-
-Then, from within your project folder:
-
-```bash
-npm run build
-surge public
+<Link href="path/here" className="btn">Hello!</Link>
 ```

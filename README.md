@@ -64,7 +64,7 @@ A component loaded by `<Route>` receives a property with route details:
 
 ### Redirects
 
-Sometimes you just want a route to send user to another place. You can use the `redirectTo` attribute for that.
+Sometimes you just want a route to send user to another place. You can use the `redirect` attribute for that.
 
 A redirect should always be a string with a path. It uses the same pattern as `path` attribute. For a redirect to run, there must be a Route with the equivalent path.
 

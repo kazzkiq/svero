@@ -87,6 +87,8 @@ A condition should be either `boolean` or a function returning `boolean`. There 
 </Router>
 ```
 
+Think of it as a simpler middleware. A condition will run *before* the route loads your component, so there is no wateful component mounting, and no screen blinking the unwanted view.
+
 ### Link Component
 
 There is also an useful `<Link>` component that overrides `<a>` elements:

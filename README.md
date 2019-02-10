@@ -62,6 +62,33 @@ A component loaded by `<Route>` receives a property with route details:
 </script>
 ```
 
+### Redirects
+
+Sometimes you just want a route to send user to another place. You can use the `redirectTo` attribute for that.
+
+A redirect should always be a string with a path. It uses the same pattern as `path` attribute. For a redirect to run, there must be a Route with the equivalent path.
+
+```html
+<Router>
+  <Route path="/company" redirect="/about-us">
+  <Route path="/about-us" component={AboutUs}>
+</Router>
+```
+
+### Conditions
+
+If you need to meet a condition in order to run a route, you can use the `condition` attribute. Conditions can also be used with `redirect` for graceful route fallback.
+
+A condition should be either `boolean` or a function returning `boolean`. There is no support for asynchronous conditions at the moment (so keep it simple).
+
+```html
+<Router>
+  <Route path="/admin/settings" condition={isAdminLogged} redirect="/admin/login">
+</Router>
+```
+
+### Link Component
+
 There is also an useful `<Link>` component that overrides `<a>` elements:
 
 ```html

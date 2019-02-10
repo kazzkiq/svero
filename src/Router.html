@@ -24,6 +24,12 @@
     });
   }
 
+  function gotoRoute(route) {
+    history.pushState({}, '', route);
+    const popEvent = new Event('popstate');
+    window.dispatchEvent(popEvent);
+  }
+
   function handlePopState(iteration) {
     // TODO: Use more elegant approach (looping to see if a global __svero__ exists is ugly)
     if (+iteration !== iteration) {
@@ -134,12 +140,6 @@
         return true;
       }
     });
-  }
-
-  function gotoRoute(route) {
-    history.pushState({}, '', route);
-    const popEvent = new Event('popstate');
-    window.dispatchEvent(popEvent);
   }
 </script>
 

@@ -3,6 +3,8 @@
   
   export const path = '/';
   export const component = undefined;
+  export const condition = undefined;
+  export const redirect = undefined;
 
   onMount(() => {
     assignRoute();
@@ -21,7 +23,9 @@
 
     window[sveroGlobal].paths.push({
       path,
-      component
+      component,
+      condition,
+      redirect
     });
   }
 </script>

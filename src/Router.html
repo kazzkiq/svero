@@ -45,6 +45,28 @@
       // If route matches exactly the url path, load the component
       // and stop the route checking
       if (route.path === browserPath) {
+        // If there is no condition, but there is a redirect, simply redirect
+        if (!route.condition && route.redirect && window['__svero__'].paths[route.redirect]) {
+          gotoRoute(route.redirect);
+          return true;
+        }
+
+        // If there is condition, handle it
+        if (route.condition && (typeof route.condition === 'boolean' || typeof route.condition === 'function')) {
+          if (typeof route.condition === 'boolean' && route.condition) {
+            updateComponent(route);
+            return true;
+          }
+
+          if (typeof route.condition === 'function' && route.condition()) {
+            updateComponent(route);
+            return true;
+          }
+
+          gotoRoute(route.redirect);
+          return true;
+        }
+
         updateComponent(route);
         return true;
       }
@@ -56,6 +78,28 @@
         const result = path.test(browserPath);
 
         if (result) {
+          // If there is no condition, but there is a redirect, simply redirect
+          if (!route.condition && route.redirect && window['__svero__'].paths[route.redirect]) {
+            gotoRoute(route.redirect);
+            return true;
+          }
+
+          // If there is condition, handle it
+          if (route.condition && (typeof route.condition === 'boolean' || typeof route.condition === 'function')) {
+            if (typeof route.condition === 'boolean' && route.condition) {
+              updateComponent(route, result);
+              return true;
+            }
+
+            if (typeof route.condition === 'function' && route.condition()) {
+              updateComponent(route, result);
+              return true;
+            }
+
+            gotoRoute(route.redirect);
+            return true;
+          }
+
           updateComponent(route, result);
           return true;
         }
@@ -64,10 +108,38 @@
       // If route is wildcard (*), fallbacks to the component
       // and stop the route checking
       if (route.path === '*') {
+        // If there is no condition, but there is a redirect, simply redirect
+        if (!route.condition && route.redirect && window['__svero__'].paths[route.redirect]) {
+          gotoRoute(route.redirect);
+          return true;
+        }
+
+        // If there is condition, handle it
+        if (route.condition && (typeof route.condition === 'boolean' || typeof route.condition === 'function')) {
+          if (typeof route.condition === 'boolean' && route.condition) {
+            updateComponent(route);
+            return true;
+          }
+
+          if (typeof route.condition === 'function' && route.condition()) {
+            updateComponent(route);
+            return true;
+          }
+
+          gotoRoute(route.redirect);
+          return true;
+        }
+        
         updateComponent(route);
         return true;
       }
     });
+  }
+
+  function gotoRoute(route) {
+    history.pushState({}, '', route);
+    const popEvent = new Event('popstate');
+    window.dispatchEvent(popEvent);
   }
 </script>
 

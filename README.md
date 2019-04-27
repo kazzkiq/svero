@@ -30,7 +30,7 @@ npm install --save svero
 The usage is super simple:
 
 ```html
-<!-- ./App.html -->
+<!-- ./App.svelte -->
 <script>
   import { Router, Route } from 'svero';
 
@@ -52,7 +52,7 @@ Paths with parameters (`:param`) are passed to components via props: `router.par
 A component loaded by `<Route>` receives a property with route details:
 
 ```html
-<!-- ./pages/Index.html -->
+<!-- ./pages/Index.svelte -->
 <script>
   export const router = {};
 

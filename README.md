@@ -35,8 +35,8 @@ The usage is super simple:
 <script>
   import { Router, Route } from 'svero';
 
-  import Index from './pages/Index.html';
-  import About from './pages/About.html';
+  import Index from './pages/Index.svelte';
+  import About from './pages/About.svelte';
 </script>
 
 <Router>

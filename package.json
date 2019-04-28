@@ -23,7 +23,7 @@
     "svelte": "^3.1.0"
   },
   "scripts": {
-    "test": "kill-port 5001 && npm run test:server & npm run test:build && npm run test:run",
+    "test": "kill-port 5001 && npm run build && npm run test:build && npm run test:server",
     "test:server": "http-server test/public -s -p 5001",
     "test:build": "rollup -c rollup.config.test.js",
     "test:run": "nightwatch",

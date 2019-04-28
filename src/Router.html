@@ -56,8 +56,13 @@
       // If route matches exactly the url path, load the component
       // and stop the route checking
       if (route.path === browserPath) {
-        // If there is no condition, but there is a redirect, simply redirect
-        if (!route.condition && route.redirect && svero.paths[route.redirect]) {
+        console.log(route);
+        // If there is no condition and no component, but there is a redirect, simply redirect
+        if (!route.condition && !route.component && route.redirect) {
+          if (!svero.paths.find(path => path.path === route.redirect)) {
+            throw Error(`svero expects <Route redirect="${route.redirect}"> to send to an existing route. ${route.redirect} does not exists.`);
+          }
+          
           gotoRoute(route.redirect);
           return true;
         }
@@ -91,6 +96,7 @@
         if (result) {
           // If there is no condition, but there is a redirect, simply redirect
           if (!route.condition && route.redirect && svero.paths[route.redirect]) {
+            console.log(route);
             gotoRoute(route.redirect);
             return true;
           }

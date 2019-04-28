@@ -1,4 +1,5 @@
 [![npm version](https://badge.fury.io/js/svero.svg)](https://www.npmjs.com/package/svero)
+[![Build Status](https://travis-ci.org/kazzkiq/svero.svg?branch=master)](https://travis-ci.org/kazzkiq/svero)
 
 <p align="center">
   svero (<b>Sve</b>lte <b>Ro</b>uter): A simple router for Svelte 3.

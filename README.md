@@ -54,7 +54,7 @@ A component loaded by `<Route>` receives a property with route details:
 ```html
 <!-- ./pages/Index.svelte -->
 <script>
-  export const router = {};
+  export let router = {};
 
   // Those contains useful information about current route status
   router.route;

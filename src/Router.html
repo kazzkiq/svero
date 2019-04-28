@@ -5,11 +5,13 @@
   export const target = document.body;
 
   function updateComponent(route, params = {}) {
-    if (window['__svero__'].currentComponent && window['__svero__'].currentComponent.$destroy) {
-      window['__svero__'].currentComponent.$destroy();
+    const svero = window['__svero__'];
+
+    if (svero.currentComponent && svero.currentComponent.$destroy) {
+      svero.currentComponent.$destroy();
     }
 
-    window['__svero__'].currentComponent = new route.component({
+    svero.currentComponent = new route.component({
       target: document.body,
       props: {
         router: {
@@ -22,33 +24,40 @@
 
   function gotoRoute(route) {
     history.pushState({}, '', route);
+
     const popEvent = new Event('popstate');
     window.dispatchEvent(popEvent);
   }
 
+  // TODO: Use more elegant approach (looping to see if a global __svero__ exists is ugly)
   function handlePopState(iteration) {
-    // TODO: Use more elegant approach (looping to see if a global __svero__ exists is ugly)
+    const svero = window['__svero__'];
+
+    // If iteration is not a number, assign zero to it
     if (+iteration !== iteration) {
       iteration = 0;
     }
 
+    // If iteration has ran more than 10 times with no Route components detected,
+    // throw error saying couldn't find routes.
     if (iteration > 10) {
       throw Error('svero expects <Route> components. None given or <Route> components with error detected.');
     }
 
-    if (!window['__svero__']) {
+    // If couldn't find Routes, run it again at the next frame painting.
+    if (!svero) {
       setTimeout(() => { handlePopState(iteration + 1) }, 16 + 1);
       return;
     }
 
-    window['__svero__'].paths.some((route) => {
+    svero.paths.some((route) => {
       const browserPath = window.location.pathname;
 
       // If route matches exactly the url path, load the component
       // and stop the route checking
       if (route.path === browserPath) {
         // If there is no condition, but there is a redirect, simply redirect
-        if (!route.condition && route.redirect && window['__svero__'].paths[route.redirect]) {
+        if (!route.condition && route.redirect && svero.paths[route.redirect]) {
           gotoRoute(route.redirect);
           return true;
         }
@@ -81,7 +90,7 @@
 
         if (result) {
           // If there is no condition, but there is a redirect, simply redirect
-          if (!route.condition && route.redirect && window['__svero__'].paths[route.redirect]) {
+          if (!route.condition && route.redirect && svero.paths[route.redirect]) {
             gotoRoute(route.redirect);
             return true;
           }
@@ -111,7 +120,7 @@
       // and stop the route checking
       if (route.path === '*') {
         // If there is no condition, but there is a redirect, simply redirect
-        if (!route.condition && route.redirect && window['__svero__'].paths[route.redirect]) {
+        if (!route.condition && route.redirect && svero.paths[route.redirect]) {
           gotoRoute(route.redirect);
           return true;
         }

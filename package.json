@@ -11,18 +11,22 @@
   ],
   "devDependencies": {
     "chromedriver": "^74.0.0",
-    "micro": "^9.3.3",
-    "npm-run-all": "^4.1.3",
+    "http-server": "^0.11.1",
+    "kill-port": "^1.3.2",
+    "local-web-server": "^2.6.1",
+    "nightwatch": "^1.0.19",
     "rollup": "^0.66.2",
     "rollup-plugin-commonjs": "^9.1.8",
     "rollup-plugin-node-resolve": "^3.4.0",
     "rollup-plugin-svelte": "^5.0.3",
     "rollup-plugin-terser": "^3.0.0",
-    "sirv-cli": "^0.2.2",
     "svelte": "^3.1.0"
   },
   "scripts": {
-    "test": "rollup -c rollup.config.test.js",
+    "test": "kill-port 5001 && npm run test:server & npm run test:build && npm run test:run",
+    "test:server": "http-server test/public -s -p 5001",
+    "test:build": "rollup -c rollup.config.test.js",
+    "test:run": "nightwatch",
     "build": "rollup -c",
     "prepublishOnly": "npm test && npm run build"
   },

@@ -1,10 +1,10 @@
 <script>
   import { onMount } from 'svelte';
   
-  export const path = '/';
-  export const component = undefined;
-  export const condition = undefined;
-  export const redirect = undefined;
+  export let path = '/';
+  export let component = undefined;
+  export let condition = undefined;
+  export let redirect = undefined;
 
   onMount(() => {
     assignRoute();

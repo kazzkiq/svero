@@ -8,7 +8,7 @@ const production = !process.env.ROLLUP_WATCH;
 export default {
 	input: 'src/main.js',
 	output: {
-		sourcemap: true,
+		sourcemap: false,
 		format: 'cjs',
 		name: 'svero',
 		file: 'build/svero.min.js'

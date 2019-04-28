@@ -4,10 +4,6 @@
 
   export const target = document.body;
 
-  onMount(() => {
-    handlePopState(0);
-  });
-
   function updateComponent(route, params = {}) {
     if (window['__svero__'].currentComponent && window['__svero__'].currentComponent.$destroy) {
       window['__svero__'].currentComponent.$destroy();
@@ -141,6 +137,10 @@
       }
     });
   }
+
+  onMount(() => {
+    handlePopState(0);
+  });
 </script>
 
 <svelte:window on:popstate={handlePopState}></svelte:window>

@@ -68,7 +68,8 @@
         }
 
         // If there is condition, handle it
-        if (route.condition && (typeof route.condition === 'boolean' || typeof route.condition === 'function')) {
+        if (route.condition !== undefined && (typeof route.condition === 'boolean' || typeof route.condition === 'function')) {
+          console.log('IS CONDITION');
           if (typeof route.condition === 'boolean' && route.condition) {
             updateComponent(route);
             return true;
@@ -78,6 +79,8 @@
             updateComponent(route);
             return true;
           }
+
+          console.log(route.redirect);
 
           gotoRoute(route.redirect);
           return true;

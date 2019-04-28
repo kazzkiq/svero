@@ -4,3 +4,4 @@ package-lock.json
 yarn.lock
 chromedriver.log
 *.xml
+tests_output

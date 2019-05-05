@@ -60,7 +60,7 @@
         // If there is no condition and no component, but there is a redirect, simply redirect
         if (!route.condition && !route.component && route.redirect) {
           if (!svero.paths.find(path => path.path === route.redirect)) {
-            throw Error(`svero expects <Route redirect="${route.redirect}"> to send to an existing route. ${route.redirect} does not exists.`);
+            throw Error(`svero expects <Route redirect="${route.redirect}"> to send to an existing route. ${route.redirect} does not exist.`);
           }
           
           gotoRoute(route.redirect);

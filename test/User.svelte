@@ -1,5 +1,5 @@
 <script>
-  import { Link } from '../build/svero.min';
+  import { Link, navigateTo } from '../build/svero.min';
 
   export let router = {};
 </script>
@@ -15,3 +15,9 @@
 {/if}
 
 <Link className="red" href="/about">Go to About</Link>
+<br>
+<button on:click={() => { navigateTo('/about') }}>Goto /about</button>
+<br>
+<em on:click={() => { navigateTo('') }}>Does nothing</em>
+<br>
+<strong on:click={() => { navigateTo('about') }}>Does nothing</strong>

@@ -1,9 +1,11 @@
-import Router from './Router.html';
-import Route from './Route.html';
-import Link from './Link.html';
+import Router from './Router.svelte';
+import Route from './Route.svelte';
+import Link from './Link.svelte';
+import { navigateTo } from './utils';
 
 export {
   Router,
   Route,
-  Link
+  Link,
+  navigateTo
 };

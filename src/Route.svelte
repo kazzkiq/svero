@@ -21,8 +21,6 @@
       window[sveroGlobal].paths = [];
     }
 
-    console.log(redirect);
-
     window[sveroGlobal].paths.push({
       path,
       component,

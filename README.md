@@ -99,3 +99,24 @@ There is also an useful `<Link>` component that overrides `<a>` elements:
 ```
 
 The difference between `<Link>` and `<a>` is that it uses `pushState` whenever possible, with fallback to `<a>` behavior. This means that when you use `<Link>`, svero can update the view based on your URL trigger, without reloading the entire page.
+
+### navigateTo()
+
+In some cases you want to navigate to routes programatically instead of letting user click on links. For this scenario we have `navigateto()` which takes a route as parameter and navigates imediatelly to said route.
+
+`navigateTo()` receives the same treatment as `<Link>`: It will always try to use `pushState` for better performance, fallbacking to a full page redirect if it isn't supported.
+
+Usage:
+
+```html
+<script>
+  import { onMount } from 'svelte';
+  import { navigateTo } from 'svero';
+
+  onMount(() => {
+    if (localStorage.getItem('logged')) {
+      navigateTo('/admin');
+    }
+  });
+</script>
+```

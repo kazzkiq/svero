@@ -1,7 +1,6 @@
 module.exports = {
   '<Link> Href Attribute Tests': (browser) => {
     browser
-      // Checking if "/" Route loads Index Component
       .url('http://localhost:5001/user/Amanda')
       .waitForElementVisible('a')
       .click('a')
@@ -12,14 +11,12 @@ module.exports = {
   },
   '<Link> ClassName Attribute Tests': (browser) => {
     browser
-      // Checking if "/" Route loads Index Component
       .url('http://localhost:5001/user/Amanda')
       .waitForElementVisible('a.red')
       .end();
   },
   '<Link> <slot> Text Tests': (browser) => {
     browser
-      // Checking if "/" Route loads Index Component
       .url('http://localhost:5001/user/Amanda')
       .waitForElementVisible('a.red')
       .assert.containsText('a.red', 'Go to About')

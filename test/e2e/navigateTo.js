@@ -1,7 +1,6 @@
 module.exports = {
   'navigateTo(path) navigate to new path': (browser) => {
     browser
-      // Checking if "/" Route loads Index Component
       .url('http://localhost:5001/user/Jon')
       .waitForElementVisible('button')
       .click('button')
@@ -12,7 +11,6 @@ module.exports = {
   },
   'navigateTo(path) empty parameter does nothing': (browser) => {
     browser
-      // Checking if "/" Route loads Index Component
       .url('http://localhost:5001/user/Jon')
       .waitForElementVisible('em')
       .click('em')
@@ -23,7 +21,6 @@ module.exports = {
   },
   'navigateTo(path) parameter not starting with slash (/) does nothing': (browser) => {
     browser
-      // Checking if "/" Route loads Index Component
       .url('http://localhost:5001/user/Jon')
       .waitForElementVisible('strong')
       .click('strong')

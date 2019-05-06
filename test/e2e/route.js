@@ -14,7 +14,6 @@ module.exports = {
   },
   '<Route> Basic path (/{name}) Tests': (browser) => {
     browser
-      // Checking if "/" Route loads Index Component
       .url('http://localhost:5001/about')
       .waitForElementVisible('h1')
       .assert.containsText('h1', 'Hello from About!')
@@ -22,7 +21,6 @@ module.exports = {
   },
   '<Route> Single param (/:name) Tests': (browser) => {
     browser
-      // Checking if "/" Route loads Index Component
       .url('http://localhost:5001/user/Amanda')
       .waitForElementVisible('h1')
       .assert.containsText('h1', 'Hello Amanda!')
@@ -30,7 +28,6 @@ module.exports = {
   },
   '<Route> Multiple params (/:name/:age) Tests': (browser) => {
     browser
-      // Checking if "/" Route loads Index Component
       .url('http://localhost:5001/user/Amanda/30')
       .waitForElementVisible('h1')
       .assert.containsText('h1', 'Hello Amanda, 30yo!')
@@ -38,7 +35,6 @@ module.exports = {
   },
   '<Route> Redirect Attribute Tests': (browser) => {
     browser
-      // Checking if "/" Route loads Index Component
       .url('http://localhost:5001/company')
       .waitForElementVisible('h1')
       .assert.containsText('h1', 'Hello from About!')
@@ -47,14 +43,14 @@ module.exports = {
   },
   '<Route> Redirect Attribute Tests': (browser) => {
     browser
-      // Checking if "/" Route loads Index Component
+      // Check if /admin-false redirects to index
       .url('http://localhost:5001/admin-false')
       .pause(100)
       .waitForElementVisible('h1')
       .assert.containsText('h1', 'Hello from Index!')
       .assert.urlContains('/')
 
-      // Checking if "/" Route loads Index Component
+      // Check if /admin-true redirects to the right page
       .url('http://localhost:5001/admin-true')
       .waitForElementVisible('h2')
       .assert.containsText('h2', 'Admin Panel')

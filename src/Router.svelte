@@ -94,7 +94,7 @@
 
         if (result) {
           // If there is no condition, but there is a redirect, simply redirect
-          if (!route.condition && route.redirect && svero.paths[route.redirect]) {
+          if (!route.condition && route.redirect && svero.paths.filter(path => path.path === route.redirect).length > 0) {
             gotoRoute(route.redirect);
             return true;
           }
@@ -124,7 +124,7 @@
       // and stop the route checking
       if (route.path === '*') {
         // If there is no condition, but there is a redirect, simply redirect
-        if (!route.condition && route.redirect && svero.paths[route.redirect]) {
+        if (!route.condition && route.redirect && svero.paths.filter(path => path.path === route.redirect).length > 0) {
           gotoRoute(route.redirect);
           return true;
         }

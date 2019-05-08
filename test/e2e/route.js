@@ -6,10 +6,10 @@ module.exports = {
       .waitForElementVisible('h1')
       .assert.containsText('h1', 'Hello from Index!')
 
-      // Checking if non-existent route still loads Index Component
+      // Checking if non-existent route redirects to About Page
       .url('http://localhost:5001/does-not-exists')
       .waitForElementVisible('h1')
-      .assert.containsText('h1', 'Hello from Index!')
+      .assert.containsText('h1', 'Hello from About!')
       .end();
   },
   '<Route> Basic path (/{name}) Tests': (browser) => {

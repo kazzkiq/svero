@@ -6,7 +6,8 @@
 </script>
 
 <Router>
-  <Route path="*" component={Index} />
+  <Route path="*" redirect="/about" />
+  <Route path="/" component={Index} />
   <Route path="/company" redirect="/about" />
   <Route path="/about" component={About} />
   <Route path="/user/:name" component={User} />

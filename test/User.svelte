@@ -14,7 +14,11 @@
   <h2>Admin Panel</h2>
 {/if}
 
-<Link className="red" href="/about">Go to About</Link>
+{#if router.params.name === 'Classious'}
+  <Link class="purple" href="/about">Go to About</Link>
+{:else}
+  <Link className="red" href="/about">Go to About</Link>
+{/if}
 <br>
 <button on:click={() => { navigateTo('/about') }}>Goto /about</button>
 <br>

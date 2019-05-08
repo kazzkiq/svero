@@ -15,6 +15,12 @@ module.exports = {
       .waitForElementVisible('a.red')
       .end();
   },
+  '<Link> Class Attribute Tests': (browser) => {
+    browser
+      .url('http://localhost:5001/user/Classious')
+      .waitForElementVisible('a.purple')
+      .end();
+  },
   '<Link> <slot> Text Tests': (browser) => {
     browser
       .url('http://localhost:5001/user/Amanda')

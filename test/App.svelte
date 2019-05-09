@@ -5,13 +5,15 @@
   import User from './User.svelte';
 </script>
 
-<Router>
-  <Route path="*" redirect="/about" />
-  <Route path="/" component={Index} />
-  <Route path="/company" redirect="/about" />
-  <Route path="/about" component={About} />
-  <Route path="/user/:name" component={User} />
-  <Route path="/user/:name/:age" component={User} />
-  <Route path="/admin-false" condition={false} component={User} redirect="/" />
-  <Route path="/admin-true" condition={true} component={User} redirect="/" />
-</Router>
+<main>
+  <Router>
+    <Route path="*" redirect="/about" />
+    <Route path="/" component={Index} />
+    <Route path="/company" redirect="/about" />
+    <Route path="/about" component={About} />
+    <Route path="/user/:name" component={User} />
+    <Route path="/user/:name/:age" component={User} />
+    <Route path="/admin-false" condition={false} component={User} redirect="/" />
+    <Route path="/admin-true" condition={true} component={User} redirect="/" />
+  </Router>
+</main>

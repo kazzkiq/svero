@@ -1,8 +1,8 @@
 <script>
   import Path from 'path-parser'
   import { onMount } from 'svelte';
-
-  export const target = document.body;
+ 
+  let ctx;
 
   function updateComponent(route, params = {}) {
     const svero = window['__svero__'];
@@ -12,7 +12,7 @@
     }
 
     svero.currentComponent = new route.component({
-      target: document.body,
+      target: ctx,
       props: {
         router: {
           route,
@@ -152,10 +152,17 @@
   }
 
   onMount(() => {
+    ctx = document.querySelector('[data-svero="ctx"]').parentElement;
     handlePopState(0);
   });
 </script>
 
-<svelte:window on:popstate={handlePopState}></svelte:window>
+<style>
+  .ctx {
+    display: none;
+  }
+</style>
 
+<svelte:window on:popstate={handlePopState}></svelte:window>
+<div class="ctx" data-svero="ctx"></div>
 <slot></slot>

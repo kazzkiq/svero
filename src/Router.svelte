@@ -3,6 +3,7 @@
   import { onMount } from 'svelte';
  
   let ctx;
+  let ctxLoaded = false;
 
   function updateComponent(route, params = {}) {
     const svero = window['__svero__'];
@@ -153,6 +154,7 @@
 
   onMount(() => {
     ctx = document.querySelector('[data-svero="ctx"]').parentElement;
+    ctxLoaded = true;
     handlePopState(0);
   });
 </script>
@@ -164,5 +166,9 @@
 </style>
 
 <svelte:window on:popstate={handlePopState}></svelte:window>
-<div class="ctx" data-svero="ctx"></div>
+
+{#if !ctxLoaded}
+  <div class="ctx" data-svero="ctx"></div>
+{/if}
+
 <slot></slot>

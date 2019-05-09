@@ -25,3 +25,5 @@
 <em on:click={() => { navigateTo('') }}>Does nothing</em>
 <br>
 <strong on:click={() => { navigateTo('about') }}>Does nothing</strong>
+<br>
+<Link href="/test-no-class">No Class Link</Link>

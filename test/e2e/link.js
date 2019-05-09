@@ -21,6 +21,12 @@ module.exports = {
       .waitForElementVisible('a.purple')
       .end();
   },
+  '<Link> Empty Class Attribute Shouldn\'t be "undefined"': (browser) => {
+    browser
+      .url('http://localhost:5001/user/Josh')
+      .waitForElementVisible('a[href="/test-no-class"]:not(.undefined)')
+      .end();
+  },
   '<Link> <slot> Text Tests': (browser) => {
     browser
       .url('http://localhost:5001/user/Amanda')

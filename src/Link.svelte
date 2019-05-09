@@ -1,7 +1,7 @@
 <script>
   import { onMount } from 'svelte';
   import { navigateTo } from './utils';
-  let cssClass;
+  let cssClass = '';
   export let href = '/';
   export let className = '';
   export { cssClass as class };

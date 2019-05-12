@@ -3,6 +3,7 @@
   "version": "0.4.3",
   "description": "Simple Router for Svelte 3",
   "main": "build/svero.min.js",
+  "module": "src/main.js",
   "files": [
     "build/svero.min.js",
     "README.md",

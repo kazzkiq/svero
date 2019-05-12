@@ -73,34 +73,7 @@
       // If route matches exactly the url path, load the component
       // and stop the route checking
       if (route.path === browserPath) {
-        // If there is no condition and no component, but there is a redirect, simply redirect
-        if (!route.condition && !route.component && route.redirect) {
-          if (!paths.find(path => path.path === route.redirect)) {
-            throw Error(`svero expects <Route redirect="${route.redirect}"> to send to an existing route. ${route.redirect} does not exist.`);
-          }
-
-          gotoRoute(route.redirect);
-          return true;
-        }
-
-        // If there is condition, handle it
-        if (route.condition !== undefined && (typeof route.condition === 'boolean' || typeof route.condition === 'function')) {
-          if (typeof route.condition === 'boolean' && route.condition) {
-            updateComponent(route);
-            return true;
-          }
-
-          if (typeof route.condition === 'function' && route.condition()) {
-            updateComponent(route);
-            return true;
-          }
-
-          gotoRoute(route.redirect);
-          return true;
-        }
-
-        updateComponent(route);
-        return true;
+        return handleRoute(route);
       }
 
       // If route includes params, check if it matches with the URL

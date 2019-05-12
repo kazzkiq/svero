@@ -39,6 +39,33 @@
     window.dispatchEvent(popEvent);
   }
 
+  function handleRoute(route, result) {
+    // If there is no condition, but there is a redirect, simply redirect
+    if (!route.condition && route.redirect && paths.filter(path => path.path === route.redirect).length > 0) {
+      gotoRoute(route.redirect);
+      return true;
+    }
+
+    // If there is condition, handle it
+    if (route.condition && (typeof route.condition === 'boolean' || typeof route.condition === 'function')) {
+      if (typeof route.condition === 'boolean' && route.condition) {
+        updateComponent(route, result);
+        return true;
+      }
+
+      if (typeof route.condition === 'function' && route.condition()) {
+        updateComponent(route, result);
+        return true;
+      }
+
+      gotoRoute(route.redirect);
+      return true;
+    }
+
+    updateComponent(route, result);
+    return true;
+  }
+
   function handlePopState() {
     paths.some((route) => {
       const browserPath = window.location.pathname;
@@ -83,60 +110,14 @@
         const result = path.test(browserPath);
 
         if (result) {
-          // If there is no condition, but there is a redirect, simply redirect
-          if (!route.condition && route.redirect && paths.filter(path => path.path === route.redirect).length > 0) {
-            gotoRoute(route.redirect);
-            return true;
-          }
-
-          // If there is condition, handle it
-          if (route.condition && (typeof route.condition === 'boolean' || typeof route.condition === 'function')) {
-            if (typeof route.condition === 'boolean' && route.condition) {
-              updateComponent(route, result);
-              return true;
-            }
-
-            if (typeof route.condition === 'function' && route.condition()) {
-              updateComponent(route, result);
-              return true;
-            }
-
-            gotoRoute(route.redirect);
-            return true;
-          }
-
-          updateComponent(route, result);
-          return true;
+          return handleRoute(route, result);
         }
       }
 
       // If route is wildcard (*), fallbacks to the component
       // and stop the route checking
       if (route.path === '*') {
-        // If there is no condition, but there is a redirect, simply redirect
-        if (!route.condition && route.redirect && paths.filter(path => path.path === route.redirect).length > 0) {
-          gotoRoute(route.redirect);
-          return true;
-        }
-
-        // If there is condition, handle it
-        if (route.condition && (typeof route.condition === 'boolean' || typeof route.condition === 'function')) {
-          if (typeof route.condition === 'boolean' && route.condition) {
-            updateComponent(route);
-            return true;
-          }
-
-          if (typeof route.condition === 'function' && route.condition()) {
-            updateComponent(route);
-            return true;
-          }
-
-          gotoRoute(route.redirect);
-          return true;
-        }
-
-        updateComponent(route);
-        return true;
+        return handleRoute(route);
       }
     });
   }

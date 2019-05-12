@@ -1,18 +1,27 @@
 <script>
   import Path from 'path-parser'
-  import { onMount } from 'svelte';
- 
+  import { writable } from 'svelte/store';
+  import { onMount, getContext, setContext } from 'svelte';
+
+  let t;
   let ctx;
   let ctxLoaded = false;
+  let currentComponent = null;
+
+  const paths = [];
+  const activePath = writable(null);
 
   function updateComponent(route, params = {}) {
-    const svero = window['__svero__'];
-
-    if (svero.currentComponent && svero.currentComponent.$destroy) {
-      svero.currentComponent.$destroy();
+    if (currentComponent && currentComponent.$destroy) {
+      currentComponent.$destroy();
+      currentComponent = null;
     }
 
-    svero.currentComponent = new route.component({
+    $activePath = route.path;
+
+    if (!route.component) return;
+
+    currentComponent = new route.component({
       target: ctx,
       props: {
         router: {
@@ -30,63 +39,43 @@
     window.dispatchEvent(popEvent);
   }
 
-  // TODO: Use more elegant approach (looping to see if a global __svero__ exists is ugly)
-  function handlePopState(iteration) {
-    const svero = window['__svero__'];
-
-    // If iteration is not a number, assign zero to it
-    if (+iteration !== iteration) {
-      iteration = 0;
+  function handleRoute(route, result) {
+    // If there is no condition, but there is a redirect, simply redirect
+    if (!route.condition && route.redirect) {
+      gotoRoute(route.redirect);
+      return true;
     }
 
-    // If iteration has ran more than 10 times with no Route components detected,
-    // throw error saying couldn't find routes.
-    if (iteration > 10) {
-      throw Error('svero expects <Route> components. None given or <Route> components with error detected.');
+    // If there is condition, handle it
+    if (route.condition && (typeof route.condition === 'boolean' || typeof route.condition === 'function')) {
+      if (typeof route.condition === 'boolean' && route.condition) {
+        updateComponent(route, result);
+        return true;
+      }
+
+      if (typeof route.condition === 'function' && route.condition()) {
+        updateComponent(route, result);
+        return true;
+      }
+
+      gotoRoute(route.redirect);
+      return true;
     }
 
-    // If couldn't find Routes, run it again at the next frame painting.
-    if (!svero) {
-      setTimeout(() => { handlePopState(iteration + 1) }, 16 + 1);
-      return;
-    }
+    updateComponent(route, result);
+    return true;
+  }
 
-    svero.paths.some((route) => {
+  function handlePopState() {
+    paths.some((route) => {
       const browserPath = window.location.pathname;
 
       // If route matches exactly the url path, load the component
       // and stop the route checking
       if (route.path === browserPath) {
-        // If there is no condition and no component, but there is a redirect, simply redirect
-        if (!route.condition && !route.component && route.redirect) {
-          if (!svero.paths.find(path => path.path === route.redirect)) {
-            throw Error(`svero expects <Route redirect="${route.redirect}"> to send to an existing route. ${route.redirect} does not exist.`);
-          }
-          
-          gotoRoute(route.redirect);
-          return true;
-        }
-
-        // If there is condition, handle it
-        if (route.condition !== undefined && (typeof route.condition === 'boolean' || typeof route.condition === 'function')) {
-          if (typeof route.condition === 'boolean' && route.condition) {
-            updateComponent(route);
-            return true;
-          }
-
-          if (typeof route.condition === 'function' && route.condition()) {
-            updateComponent(route);
-            return true;
-          }
-
-          gotoRoute(route.redirect);
-          return true;
-        }
-
-        updateComponent(route);
-        return true;
+        return handleRoute(route);
       }
-      
+
       // If route includes params, check if it matches with the URL
       // and stop the route checking
       if (route.path.includes(':')) {
@@ -94,68 +83,49 @@
         const result = path.test(browserPath);
 
         if (result) {
-          // If there is no condition, but there is a redirect, simply redirect
-          if (!route.condition && route.redirect && svero.paths.filter(path => path.path === route.redirect).length > 0) {
-            gotoRoute(route.redirect);
-            return true;
-          }
-
-          // If there is condition, handle it
-          if (route.condition && (typeof route.condition === 'boolean' || typeof route.condition === 'function')) {
-            if (typeof route.condition === 'boolean' && route.condition) {
-              updateComponent(route, result);
-              return true;
-            }
-
-            if (typeof route.condition === 'function' && route.condition()) {
-              updateComponent(route, result);
-              return true;
-            }
-
-            gotoRoute(route.redirect);
-            return true;
-          }
-
-          updateComponent(route, result);
-          return true;
+          return handleRoute(route, result);
         }
       }
 
       // If route is wildcard (*), fallbacks to the component
       // and stop the route checking
       if (route.path === '*') {
-        // If there is no condition, but there is a redirect, simply redirect
-        if (!route.condition && route.redirect && svero.paths.filter(path => path.path === route.redirect).length > 0) {
-          gotoRoute(route.redirect);
-          return true;
-        }
-
-        // If there is condition, handle it
-        if (route.condition && (typeof route.condition === 'boolean' || typeof route.condition === 'function')) {
-          if (typeof route.condition === 'boolean' && route.condition) {
-            updateComponent(route);
-            return true;
-          }
-
-          if (typeof route.condition === 'function' && route.condition()) {
-            updateComponent(route);
-            return true;
-          }
-
-          gotoRoute(route.redirect);
-          return true;
-        }
-        
-        updateComponent(route);
-        return true;
+        return handleRoute(route);
       }
     });
+  }
+
+  function debouncedHandlePopState() {
+    clearTimeout(t);
+    t = setTimeout(handlePopState, 100);
+  }
+
+  function assignRoute(route) {
+    paths.push(route);
+    debouncedHandlePopState();
+  }
+
+  function unassignRoute(path) {
+    const offset = paths.findIndex(route => route.path === path);
+
+    if (offset !== -1) {
+      paths.splice(offset, 1);
+      debouncedHandlePopState();
+    }
   }
 
   onMount(() => {
     ctx = document.querySelector('[data-svero="ctx"]').parentElement;
     ctxLoaded = true;
-    handlePopState(0);
+    debouncedHandlePopState();
+  });
+
+  setContext('__svero__', {
+    activePath,
+    paths,
+    gotoRoute,
+    assignRoute,
+    updateComponent
   });
 </script>
 

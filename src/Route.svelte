@@ -1,8 +1,7 @@
 <script>
   import { onMount, onDestroy, getContext } from 'svelte';
-  import ROUTER from './context';
 
-  const { assignRoute, unassignRoute, activePath } = getContext(ROUTER);
+  const { assignRoute, unassignRoute, activePath } = getContext('__svero__');
 
   export let path = '/';
   export let component = undefined;

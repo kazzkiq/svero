@@ -2,7 +2,6 @@
   import Path from 'path-parser'
   import { writable } from 'svelte/store';
   import { onMount, getContext, setContext } from 'svelte';
-  import ROUTER from './context';
 
   let t;
   let ctx;
@@ -10,12 +9,12 @@
   let currentComponent = null;
 
   const paths = [];
-  const router = getContext(ROUTER);
   const activePath = writable(null);
 
   function updateComponent(route, params = {}) {
     if (currentComponent && currentComponent.$destroy) {
       currentComponent.$destroy();
+      currentComponent = null;
     }
 
     $activePath = route.path;
@@ -167,7 +166,7 @@
     debouncedHandlePopState();
   });
 
-  setContext(ROUTER, {
+  setContext('__svero__', {
     activePath,
     paths,
     gotoRoute,

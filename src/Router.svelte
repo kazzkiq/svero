@@ -41,7 +41,7 @@
 
   function handleRoute(route, result) {
     // If there is no condition, but there is a redirect, simply redirect
-    if (!route.condition && route.redirect && paths.filter(path => path.path === route.redirect).length > 0) {
+    if (!route.condition && route.redirect) {
       gotoRoute(route.redirect);
       return true;
     }

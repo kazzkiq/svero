@@ -12,6 +12,13 @@ module.exports = {
       .assert.containsText('h1', 'Hello from About!')
       .end();
   },
+  '<Route> Slot rendering (/slot) Tests': (browser) => {
+    browser
+      .url('http://localhost:5001/slot')
+      .waitForElementVisible('h3')
+      .assert.containsText('h3', 'It works!')
+      .end();
+  },
   '<Route> Basic path (/{name}) Tests': (browser) => {
     browser
       .url('http://localhost:5001/about')

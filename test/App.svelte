@@ -15,5 +15,6 @@
     <Route path="/user/:name/:age" component={User} />
     <Route path="/admin-false" condition={false} component={User} redirect="/" />
     <Route path="/admin-true" condition={true} component={User} redirect="/" />
+    <Route path="/slot"><h3>It works!</h3></Route>
   </Router>
 </main>

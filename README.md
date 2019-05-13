@@ -71,6 +71,34 @@ A component loaded by `<Route>` receives a property with route details:
 </script>
 ```
 
+Routes can also render any given markup when they're active, e.g.
+
+```html
+<Route path="/static-path">
+  <h1>It works!</h1>
+</Route>
+```
+
+> You can access `router` within `<slot />` renders by declaring `let:router` on `<Router />` or `<Route />` components (see below).
+
+If you're building an SPA or simply want to leverage on hash-based routing for certain components try the following:
+
+```html
+<Route path="#g/:gistId/*filePath" let:router>
+  <p>Info: {JSON.stringify(router.params)}</p>
+</Route>
+```
+
+Standard anchors and `<Link />` components will work as usual:
+
+```html
+<a href="#g/1acf21/path/to/README.md">View README.md</a>
+```
+
+> Given hash-based routes can be as `#!/foo/bar` or `#foo/bar` as they're normalized behind scenes as regular paths.
+
+Declaring a component `<Route path="#" />` will serve as fallback when `location.hash` is empty.
+
 ### Redirects
 
 Sometimes you just want a route to send user to another place. You can use the `redirect` attribute for that.
@@ -107,6 +135,8 @@ There is also an useful `<Link>` component that overrides `<a>` elements:
 ```
 
 The difference between `<Link>` and `<a>` is that it uses `pushState` whenever possible, with fallback to `<a>` behavior. This means that when you use `<Link>`, svero can update the view based on your URL trigger, without reloading the entire page.
+
+> Given `href` values will be normalized if they don't start with a slash, e.g. when `location.pathname === '/foo'` then `#bar` would become `/foo#bar` as result.
 
 ### navigateTo()
 

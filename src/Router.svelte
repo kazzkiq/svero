@@ -1,98 +1,81 @@
+<script context="module">
+  import Router from 'abstract-nested-router';
+  import { navigateTo } from './utils';
+
+  const router = new Router();
+</script>
+
 <script>
-  import Path from 'path-parser'
   import { writable } from 'svelte/store';
   import { onMount, getContext, setContext } from 'svelte';
 
   let t;
   let ctx;
+  let failure;
+  let fallback;
   let ctxLoaded = false;
-  let currentComponent = null;
 
-  const paths = [];
-  const activePath = writable(null);
+  export let path = '/';
+  export let nofallback;
 
-  function updateComponent(route, params = {}) {
-    if (currentComponent && currentComponent.$destroy) {
-      currentComponent.$destroy();
-      currentComponent = null;
-    }
+  const routes = writable([]);
+  const routeInfo = writable({});
 
-    $activePath = route.path;
+  function fixPath(route) {
+    if (route === '/#*' || route === '#*') return '/#*_';
+    if (route === '/*' || route === '*') return '/*_';
+    return route;
+  }
 
-    if (!route.component) return;
+  function handleRoutes(map) {
+    const params = map.reduce((prev, cur) => {
+      prev[cur.key] = Object.assign(prev[cur.key] || {}, cur.params);
+      return prev;
+    }, {});
 
-    currentComponent = new route.component({
-      target: ctx,
-      props: {
-        router: {
-          route,
-          params
+    let skip;
+    let routes = {};
+
+    map.some(x => {
+      if (typeof x.condition === 'boolean' || typeof x.condition === 'function') {
+        const ok = typeof x.condition === 'function' ? x.condition() : x.condition;
+
+        if (ok === false && x.redirect) {
+          navigateTo(x.redirect);
+          skip = true;
+          return true;
         }
       }
+
+      if (x.key && !routes[x.key]) {
+        if (x.exact && !x.matches) return false;
+        routes[x.key] = { ...x, params: params[x.key] };
+      }
+
+      return false;
     });
-  }
 
-  function gotoRoute(route) {
-    history.pushState({}, '', route);
-
-    const popEvent = new Event('popstate');
-    window.dispatchEvent(popEvent);
-  }
-
-  function handleRoute(route, result) {
-    // If there is no condition, but there is a redirect, simply redirect
-    if (!route.condition && route.redirect) {
-      gotoRoute(route.redirect);
-      return true;
+    if (!skip) {
+      $routeInfo = routes;
     }
-
-    // If there is condition, handle it
-    if (route.condition && (typeof route.condition === 'boolean' || typeof route.condition === 'function')) {
-      if (typeof route.condition === 'boolean' && route.condition) {
-        updateComponent(route, result);
-        return true;
-      }
-
-      if (typeof route.condition === 'function' && route.condition()) {
-        updateComponent(route, result);
-        return true;
-      }
-
-      gotoRoute(route.redirect);
-      return true;
-    }
-
-    updateComponent(route, result);
-    return true;
   }
 
   function handlePopState() {
-    paths.some((route) => {
-      const browserPath = window.location.pathname;
+    const fullpath = `/${location.href.split('/').slice(3).join('/')}`.replace(/(?!^)\/#/, '#').replace(/\/$/, '');
 
-      // If route matches exactly the url path, load the component
-      // and stop the route checking
-      if (route.path === browserPath) {
-        return handleRoute(route);
+    try {
+      const base = router.find(fullpath.split('#')[0]);
+      const full = router.find(fullpath);
+
+      handleRoutes(base.concat(full));
+    } catch (e) {
+      if (!fallback) {
+        failure = e;
+        return;
       }
 
-      // If route includes params, check if it matches with the URL
-      // and stop the route checking
-      if (route.path.includes(':')) {
-        const path = new Path(route.path);
-        const result = path.test(browserPath);
-
-        if (result) {
-          return handleRoute(route, result);
-        }
-      }
-
-      // If route is wildcard (*), fallbacks to the component
-      // and stop the route checking
-      if (route.path === '*') {
-        return handleRoute(route);
-      }
-    });
+      $routeInfo = { [fallback]: e };
+    }
   }
 
   function debouncedHandlePopState() {
@@ -100,18 +83,29 @@
     t = setTimeout(handlePopState, 100);
   }
 
-  function assignRoute(route) {
-    paths.push(route);
+  function assignRoute(key, route, routeInfo) {
+    key = key || Math.random().toString(36).substr(2);
+
+    const handler = { key, ...routeInfo };
+
+    let fullpath;
+
+    router.mount(path, () => {
+      fullpath = router.add(fixPath(route), handler);
+      fallback = (handler.fallback && key) || fallback;
+    });
+
     debouncedHandlePopState();
+
+    return [key, fullpath];
   }
 
-  function unassignRoute(path) {
-    const offset = paths.findIndex(route => route.path === path);
+  function unassignRoute(route) {
+    router.mount(path, () => {
+      router.rm(fixPath(route));
+    });
 
-    if (offset !== -1) {
-      paths.splice(offset, 1);
-      debouncedHandlePopState();
-    }
+    debouncedHandlePopState();
   }
 
   onMount(() => {
@@ -121,11 +115,10 @@
   });
 
   setContext('__svero__', {
-    activePath,
-    paths,
-    gotoRoute,
+    routes,
+    routeInfo,
     assignRoute,
-    updateComponent
+    unassignRoute,
   });
 </script>
 
@@ -141,4 +134,11 @@
   <div class="ctx" data-svero="ctx"></div>
 {/if}
 
-<slot></slot>
+{#if failure && !nofallback}
+  <fieldset>
+    <legend>Router failure: {path}</legend>
+    <pre>{failure}</pre>
+  </fieldset>
+{/if}
+
+<slot />

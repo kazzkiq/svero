@@ -7,7 +7,7 @@ module.exports = {
 
       .url('http://localhost:5001/does-not-exists')
       .waitForElementVisible('main h1')
-      .assert.containsText('main h1', 'Hello from About!')
+      .assert.containsText('main h1', 'Not found')
       .end();
   },
   '<Router> should not keep [data-svero="ctx"] element': (browser) => {

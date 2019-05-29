@@ -16,9 +16,8 @@
   let ctxLoaded = false;
 
   export let path = '/';
-  export let nofallback;
+  export let nofallback = null;
 
-  const routes = writable([]);
   const routeInfo = writable({});
 
   function fixPath(route) {
@@ -74,7 +73,7 @@
         return;
       }
 
-      $routeInfo = { [fallback]: e };
+      $routeInfo = { [fallback]: { failure: e, params: { _: fullpath.substr(1) } } };
     }
   }
 
@@ -115,7 +114,6 @@
   });
 
   setContext('__svero__', {
-    routes,
     routeInfo,
     assignRoute,
     unassignRoute,

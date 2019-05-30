@@ -20,8 +20,12 @@
 
   const routeInfo = writable({});
 
+  function cleanPath(route) {
+    return route.replace(/(?!^)\/#/, '#').replace('/#', '#').replace(/\/$/, '');
+  }
+
   function fixPath(route) {
-    if (route === '/#*' || route === '#*') return '/#*_';
+    if (route === '/#*' || route === '#*') return '#*_';
     if (route === '/*' || route === '*') return '/*_';
     return route;
   }
@@ -87,7 +91,7 @@
   }
 
   function handlePopState() {
-    const fullpath = `/${location.href.split('/').slice(3).join('/')}`.replace(/(?!^)\/#/, '#').replace(/\/$/, '');
+    const fullpath = cleanPath(`/${location.href.split('/').slice(3).join('/')}`);
 
     try {
       const found = resolveRoutes(fullpath);

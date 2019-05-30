@@ -66,8 +66,7 @@
   function resolveRoutes(path) {
     const segments = path.split('#')[0].split('/');
     const prefix = [];
-
-    let last;
+    const map = [];
 
     segments.forEach(key => {
       const sub = prefix.concat(`/${key}`).join('');
@@ -78,25 +77,23 @@
         const next = router.find(sub);
 
         handleRoutes(next);
-
-        last = next;
+        map.push(...next);
       } catch (e_) {
-        handleRoutes(last);
         doFallback(e_, path);
       }
     });
 
-    return last;
+    return map;
   }
 
   function handlePopState() {
     const fullpath = `/${location.href.split('/').slice(3).join('/')}`.replace(/(?!^)\/#/, '#').replace(/\/$/, '');
 
     try {
-      const last = resolveRoutes(fullpath);
+      const found = resolveRoutes(fullpath);
 
       if (fullpath.includes('#')) {
-        handleRoutes(last.concat(router.find(fullpath)));
+        handleRoutes(found.concat(router.find(fullpath)));
       }
     } catch (e) {
       if (!fallback) {

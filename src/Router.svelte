@@ -59,21 +59,52 @@
     }
   }
 
+  function doFallback(e, path) {
+    $routeInfo[fallback] = { failure: e, params: { _: path.substr(1) } };
+  }
+
+  function resolveRoutes(path) {
+    const segments = path.split('#')[0].split('/');
+    const prefix = [];
+
+    let last;
+
+    segments.forEach(key => {
+      const sub = prefix.concat(`/${key}`).join('');
+
+      if (key) prefix.push(`/${key}`);
+
+      try {
+        const next = router.find(sub);
+
+        handleRoutes(next);
+
+        last = next;
+      } catch (e_) {
+        handleRoutes(last);
+        doFallback(e_, path);
+      }
+    });
+
+    return last;
+  }
+
   function handlePopState() {
     const fullpath = `/${location.href.split('/').slice(3).join('/')}`.replace(/(?!^)\/#/, '#').replace(/\/$/, '');
 
     try {
-      const base = router.find(fullpath.split('#')[0]);
-      const full = router.find(fullpath);
+      const last = resolveRoutes(fullpath);
 
-      handleRoutes(base.concat(full));
+      if (fullpath.includes('#')) {
+        handleRoutes(last.concat(router.find(fullpath)));
+      }
     } catch (e) {
       if (!fallback) {
         failure = e;
         return;
       }
 
-      $routeInfo = { [fallback]: { failure: e, params: { _: fullpath.substr(1) } } };
+      doFallback(e, fullpath);
     }
   }
 

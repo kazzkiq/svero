@@ -22,7 +22,6 @@
           <Route path="#:any/*path" let:router>Params: {JSON.stringify(router.params)}</Route>
           <Route path="#test">Static placeholder is shown</Route>
           <Route path="#">No hash is present</Route>
-          <Route path="*"><h1>O.K.</h1></Route>
         </p>
       </Route>
     </Router>
@@ -31,3 +30,30 @@
     </Route>
   </Router>
 </main>
+
+<Router nofallback path="/sub">
+  <Route>
+    <fieldset>
+      <legend>Routing:</legend>
+      <Router nofallback path="/sub/:bar">
+        <Route let:router>{router.params.bar}!</Route>
+      </Router>
+      <Route path="/foo">Foo</Route>
+      <Route fallback path="*" let:router>
+        <summary>
+          <p>Not found: {router.params._}</p>
+          <details>{router.failure}</details>
+        </summary>
+      </Route>
+      <Router nofallback path="/sub/nested">
+        <Route>
+          [...]
+          <Route fallback path="*">not found?</Route>
+          <Route path="/a">A</Route>
+          <Route path="/b/:c">C</Route>
+          <Route path="/:value" let:router>{JSON.stringify(router.params)}</Route>
+        </Route>
+      </Router>
+    </fieldset>
+  </Route>
+</Router>

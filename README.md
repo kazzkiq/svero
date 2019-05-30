@@ -58,6 +58,8 @@ Your custom props can be passed by putting your component in the Route `slot` (E
 
 Paths with parameters (`:param`) are passed to components via props: `router.params`.
 
+> Parameters like `*param` will capture the rest of segments. You can access them as `router.params._` like other params.
+
 A component loaded by `<Route>` receives a property with route details:
 
 ```html
@@ -66,6 +68,7 @@ A component loaded by `<Route>` receives a property with route details:
   export let router = {};
 
   // Those contains useful information about current route status
+  router.path; // /test
   router.route; // Route Object
   router.params; // /about/bill/123/kansas { who: 'bill', where: 'kansas' }
 </script>
@@ -95,9 +98,49 @@ Standard anchors and `<Link />` components will work as usual:
 <a href="#g/1acf21/path/to/README.md">View README.md</a>
 ```
 
-> Given hash-based routes can be as `#!/foo/bar` or `#foo/bar` as they're normalized behind scenes as regular paths.
-
 Declaring a component `<Route path="#" />` will serve as fallback when `location.hash` is empty.
+
+### Nesting
+
+You can render `svero` components inside anything, e.g.
+
+```html
+<Router nofallback path="/sub">
+  <Route>
+    <fieldset>
+      <legend>Routing:</legend>
+      <Router nofallback path="/sub/:bar">
+        <Route let:router>{router.params.bar}!</Route>
+      </Router>
+      <Route path="/foo">Foo</Route>
+      <Route fallback path="*" let:router>
+        <summary>
+          <p>Not found: {router.params._}</p>
+          <details>{router.failure}</details>
+        </summary>
+      </Route>
+      <Router nofallback path="/sub/nested">
+        <Route>
+          [...]
+          <Route fallback path="*">not found?</Route>
+          <Route path="/a">A</Route>
+          <Route path="/b/:c">C</Route>
+          <Route path="/:value" let:router>{JSON.stringify(router.params)}</Route>
+        </Route>
+      </Router>
+    </fieldset>
+  </Route>
+</Router>
+```
+
+Properties determine how routing will match and render routes:
+
+- Use the `nofallback` prop for telling `<Router />` to disable the _fallback_ mechanism by default
+- Any route using the `fallback` prop will catch unmatched routes or potential look-up errors
+- Use the `exact` prop to skip this route from render just in case it does not matches
+- A `<Route />` without `path` will render only if `<Router path="..." />` is active!
+
+> Note that all `<Router />` paths MUST begin from the root as `/sub` and `/sub/nested` in the example.
 
 ### Redirects
 
@@ -136,7 +179,7 @@ There is also an useful `<Link>` component that overrides `<a>` elements:
 
 The difference between `<Link>` and `<a>` is that it uses `pushState` whenever possible, with fallback to `<a>` behavior. This means that when you use `<Link>`, svero can update the view based on your URL trigger, without reloading the entire page.
 
-> Given `href` values will be normalized if they don't start with a slash, e.g. when `location.pathname === '/foo'` then `#bar` would become `/foo#bar` as result.
+> Given `href` values will be normalized (on-click) if they don't start with a slash, e.g. when `location.pathname === '/foo'` then `#bar` would become `/foo#bar` as result.
 
 ### navigateTo()
 

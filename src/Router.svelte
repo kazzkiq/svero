@@ -21,7 +21,7 @@
   const routeInfo = writable({});
 
   function cleanPath(route) {
-    return route.split('?')[0].replace(/(?!^)\/#/, '#').replace('/#', '#').replace(/\/$/, '');
+    return route.replace(/\?[^#]*/, '').replace(/(?!^)\/#/, '#').replace('/#', '#').replace(/\/$/, '');
   }
 
   function fixPath(route) {

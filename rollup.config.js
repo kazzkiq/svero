@@ -7,28 +7,23 @@ const production = !process.env.ROLLUP_WATCH;
 
 export default {
 	input: 'src/main.js',
-	output: {
-		sourcemap: false,
-		format: 'cjs',
-		name: 'svero',
-		file: 'build/svero.min.js'
-	},
+	output: [{
+    sourcemap: false,
+    format: 'umd',
+    name: 'svero',
+    file: 'build/svero.min.js'
+  }, {
+    sourcemap: false,
+    format: 'es',
+    file: 'build/svero.mjs'
+  }],
 	plugins: [
 		svelte({
 			// enable run-time checks when not in production
 			dev: !production,
 		}),
-
-		// If you have external dependencies installed from
-		// npm, you'll most likely need these plugins. In
-		// some cases you'll need additional configuration —
-		// consult the documentation for details:
-		// https://github.com/rollup/rollup-plugin-commonjs
 		resolve(),
 		commonjs(),
-
-		// If we're building for production (npm run build
-		// instead of npm run dev), minify
-		production && terser()
+    production && terser()
 	]
 };

@@ -1,1 +1,1576 @@
-function t(){}function n(t,n){for(const e in n)t[e]=n[e];return t}function e(t){return t()}function o(){return Object.create(null)}function r(t){t.forEach(e)}function c(t){return"function"==typeof t}function a(t,n){return t!=t?n==n:t!==n||t&&"object"==typeof t||"function"==typeof t}function s(t,n,e){const o=n.subscribe(e);t.$$.on_destroy.push(o.unsubscribe?()=>o.unsubscribe():o)}function i(t,n,e){if(t){const o=u(t,n,e);return t[0](o)}}function u(t,e,o){return t[1]?n({},n(e.$$scope.ctx,t[1](o?o(e):{}))):e.$$scope.ctx}function l(t,e,o,r){return t[1]?n({},n(e.$$scope.changed||{},t[1](r?r(o):{}))):e.$$scope.changed||{}}function f(t,n){t.appendChild(n)}function p(t,n,e){t.insertBefore(n,e||null)}function d(t){t.parentNode.removeChild(t)}function $(t){return document.createElement(t)}function h(t){return document.createTextNode(t)}function m(){return h(" ")}function y(){return h("")}function v(t,n,e,o){return t.addEventListener(n,e,o),()=>t.removeEventListener(n,e,o)}function g(t,n){n=""+n,t.data!==n&&(t.data=n)}let k;function b(t){k=t}function x(){if(!k)throw new Error("Function called outside component initialization");return k}function _(t){x().$$.on_mount.push(t)}function w(){const t=k;return(n,e)=>{const o=t.$$.callbacks[n];if(o){const r=function(t,n){const e=document.createEvent("CustomEvent");return e.initCustomEvent(t,!1,!1,n),e}(n,e);o.slice().forEach(n=>{n.call(t,r)})}}}const E=[],N=Promise.resolve();let j=!1;const O=[],I=[],S=[];function C(t){I.push(t)}function R(){const t=new Set;do{for(;E.length;){const t=E.shift();b(t),T(t.$$)}for(;O.length;)O.shift()();for(;I.length;){const n=I.pop();t.has(n)||(n(),t.add(n))}}while(E.length);for(;S.length;)S.pop()();j=!1}function T(t){t.fragment&&(t.update(t.dirty),r(t.before_render),t.fragment.p(t.dirty,t.ctx),t.dirty=null,t.after_render.forEach(C))}let L;function A(){L={remaining:0,callbacks:[]}}function P(){L.remaining||r(L.callbacks)}function q(t){L.callbacks.push(t)}function B(t,n,o){const{fragment:a,on_mount:s,on_destroy:i,after_render:u}=t.$$;a.m(n,o),C(()=>{const n=s.map(e).filter(c);i?i.push(...n):r(n),t.$$.on_mount=[]}),u.forEach(C)}function M(t,n){t.$$.dirty||(E.push(t),j||(j=!0,N.then(R)),t.$$.dirty=o()),t.$$.dirty[n]=!0}function U(n,e,c,a,s,i){const u=k;b(n);const l=e.props||{},f=n.$$={fragment:null,ctx:null,props:i,update:t,not_equal:s,bound:o(),on_mount:[],on_destroy:[],before_render:[],after_render:[],context:new Map(u?u.$$.context:[]),callbacks:o(),dirty:null};let p=!1;f.ctx=c?c(n,l,(t,e)=>{f.ctx&&s(f.ctx[t],f.ctx[t]=e)&&(f.bound[t]&&f.bound[t](e),p&&M(n,t))}):l,f.update(),p=!0,r(f.before_render),f.fragment=a(f.ctx),e.target&&(e.hydrate?f.fragment.l(function(t){return Array.from(t.childNodes)}(e.target)):f.fragment.c(),e.intro&&n.$$.fragment.i&&n.$$.fragment.i(),B(n,e.target,e.anchor),R()),b(u)}class z{$destroy(){var n,e;e=!0,(n=this).$$&&(r(n.$$.on_destroy),n.$$.fragment.d(e),n.$$.on_destroy=n.$$.fragment=null,n.$$.ctx={}),this.$destroy=t}$on(t,n){const e=this.$$.callbacks[t]||(this.$$.callbacks[t]=[]);return e.push(n),()=>{const t=e.indexOf(n);-1!==t&&e.splice(t,1)}}$set(){}}var D=function(t){function n(n,e){var o="Unreachable '"+n+"', segment '"+e+"' is not defined";t.call(this,o),this.message=o}return t&&(n.__proto__=t),n.prototype=Object.create(t&&t.prototype),n.prototype.constructor=n,n}(Error);var F=function(t,n){var e=function(t,n){var e,o,r=-100,c=[];e=t.replace(/[-$.]/g,"\\$&").replace(/\(/g,"(?:").replace(/\)/g,")?").replace(/([:*]\w+)(?:<([^<>]+?)>)?/g,function(t,n,e){return c.push(n.substr(1)),":"===n.charAt()?(r+=100,"((?!#)"+(e||"[^/]+?")+")"):(o=!0,r+=500,"((?!#)"+(e||".+?")+")")});try{e=new RegExp("^"+e+"$")}catch(t){throw new TypeError("Invalid route expression, given '"+n+"'")}var a=t.includes("#")?.5:1,s=t.length*r*a;return{keys:c,regex:e,_depth:s,_isSplat:o}}(t,n),o=e.keys,r=e.regex,c=e._depth;return{_isSplat:e._isSplat,_depth:c,match:function(t){var n=t.match(r);if(n)return o.reduce(function(t,e,o){return t[e]="string"==typeof n[o+1]?decodeURIComponent(n[o+1]):null,t},{})}}};function G(t,n){return""+(n&&"/"!==n?n:"")+(t||"")}function H(t,n){var e=t.match(/<[^<>]*\/[^<>]*>/);if(e)throw new TypeError("RegExp cannot contain slashes, given '"+e+"'");var o="/"!==t?t.split("/"):[""],r=[];o.some(function(t,e){var c=r.concat(t).join("/")||null,a=o.slice(e+1).join("/")||null,s=n("/"+t,c,a?(t?"/"+t:"")+"/"+a:null);return r.push(t),s})}function J(t,n,e){for(var o=function(t,n,e){var o,r={},c=[];return H(t,function(a,s,i){var u;if(!n.keys)throw new D(t,a);if(n.keys.some(function(t){if(e.includes(t))return!1;var l=n[t].pattern,f=l.match,p=l._isSplat,d=f(p&&i||a);return!!d&&(Object.assign(r,d),n[t].route&&c.push(Object.assign({},n[t].info,{matches:a===s||p||!i,params:Object.assign({},r),route:n[t].route,path:p?i:s||a})),null===i&&!n[t].keys||("/"!==t&&e.push(t),o=p,n=n[t],u=!0,!0))}),!u&&!n.keys.some(function(t){return n[t].pattern.match(a)}))throw new D(t,a);return o||!u}),c}.bind(null,t,n),r=[];e>0;){e-=1;try{return o(r)}catch(t){if(e>0)return o(r);throw t}}}F.push=function(t,n,e,o){var r=n[t]||(n[t]={});return r.pattern||(r.pattern=new F(t,o),r.route=e||"/"),n.keys=n.keys||[],n.keys.includes(t)||(n.keys.push(t),F.sort(n)),r},F.sort=function(t){t.keys.sort(function(n,e){return t[n].pattern._depth-t[e].pattern._depth})};function K(t){if(!t||"string"!=typeof t)throw Error(`svero expects navigateTo() to have a string parameter. The parameter provided was: ${t} of type ${typeof t} instead.`);if("/"!==t[0]&&"#"!==t[0])throw Error(`svero expects navigateTo() param to start with slash or hash, e.g. "/${t}" or "#${t}" instead of "${t}".`);history.pushState&&window.dispatchEvent?(history.pushState({},"",t),window.dispatchEvent(new Event("popstate"))):window.location.href=t}function Q(t){var n;return{c(){(n=$("div")).className="ctx svelte-h7mijx",n.dataset.svero="ctx"},m(t,e){p(t,n,e)},d(t){t&&d(n)}}}function V(t){var n,e,o,r,c,a,s;return{c(){n=$("fieldset"),e=$("legend"),o=h("Router failure: "),r=h(t.path),c=m(),a=$("pre"),s=h(t.failure)},m(t,i){p(t,n,i),f(n,e),f(e,o),f(e,r),f(n,c),f(n,a),f(a,s)},p(t,n){t.path&&g(r,n.path),t.failure&&g(s,n.failure)},d(t){t&&d(n)}}}function W(t){var n,e,o,r,c=!t.ctxLoaded&&Q(),a=t.failure&&!t.nofallback&&V(t);const s=t.$$slots.default,f=i(s,t,null);return{c(){c&&c.c(),n=m(),a&&a.c(),e=m(),f&&f.c(),r=v(window,"popstate",t.handlePopState)},l(t){f&&f.l(t)},m(t,r){c&&c.m(t,r),p(t,n,r),a&&a.m(t,r),p(t,e,r),f&&f.m(t,r),o=!0},p(t,o){o.ctxLoaded?c&&(c.d(1),c=null):c||((c=Q()).c(),c.m(n.parentNode,n)),o.failure&&!o.nofallback?a?a.p(t,o):((a=V(o)).c(),a.m(e.parentNode,e)):a&&(a.d(1),a=null),f&&f.p&&t.$$scope&&f.p(l(s,o,t,null),u(s,o,null))},i(t){o||(f&&f.i&&f.i(t),o=!0)},o(t){f&&f.o&&f.o(t),o=!1},d(t){c&&c.d(t),t&&d(n),a&&a.d(t),t&&d(e),f&&f.d(t),r()}}}const X=new function(){var t={},n=[];return{mount:function(t,e){"/"!==t&&n.push(t),e(),n.pop()},find:function(n,e){return J(n,t,!0===e?2:e||1)},add:function(e,o){return function(t,n,e,o){var r=G(t,e),c=n;return H(r,function(t,n){c=F.push(t,c,n,r),"/"!==t&&(c.info=c.info||Object.assign({},o))}),c.info=c.info||Object.assign({},o),r}(e,t,n.join(""),o)},rm:function(e){return function(t,n,e){var o=G(t,e),r=n,c=null,a=null;if(H(o,function(e){if(!r)return c=null,!0;if(a=e,!(c="/"===e?n["/"]:r).keys)throw new D(t,e);r=r[e]}),!c||!a)throw new D(t,a);delete c[a],"/"===a&&(delete c.info,delete c.route),-1!==c.keys.indexOf(a)&&(c.keys.splice(c.keys.indexOf(a),1),F.sort(c))}(e,t,n.join(""))}}};function Y(t){return"/#*"===t||"#*"===t?"#*_":"/*"===t||"*"===t?"/*_":t}function Z(n,e,o){let r,c,i,u,l,f=!1,{path:p="/",nofallback:d=null}=e;const $=function(n,e=t){let o;const r=[];function c(t){if(a(n,t)){if(n=t,!o)return;r.forEach(t=>t[1]()),r.forEach(t=>t[0](n))}}return{set:c,update:function(t){c(t(n))},subscribe:function(a,s=t){const i=[a,s];return r.push(i),1===r.length&&(o=e(c)||t),a(n),()=>{const t=r.indexOf(i);-1!==t&&r.splice(t,1),0===r.length&&o()}}}}({});function h(t){const n=t.reduce((t,n)=>(t[n.key]=Object.assign(t[n.key]||{},n.params),t),{});let e,o={};t.some(t=>{if("boolean"==typeof t.condition||"function"==typeof t.condition){if(!1===("function"==typeof t.condition?t.condition():t.condition)&&t.redirect)return K(t.redirect),e=!0,!0}if(t.key&&!o[t.key]){if(t.exact&&!t.matches)return!1;o[t.key]={...t,params:n[t.key]}}return!1}),e||(r=o,$.set(r))}function m(t,n){r[l]={failure:t,params:{_:n.substr(1)}},$.set(r)}function y(){const t=`/${location.href.split("/").slice(3).join("/")}`.replace(/\?[^#]*/,"").replace(/(?!^)\/#/,"#").replace("/#","#").replace(/\/$/,"");try{const n=function(t){const n=t.split("#")[0].split("/"),e=[],o=[];return n.forEach(n=>{const r=e.concat(`/${n}`).join("");n&&e.push(`/${n}`);try{const n=X.find(r);h(n),o.push(...n)}catch(n){m(n,t)}}),o}(t);t.includes("#")&&h(n.concat(X.find(t)))}catch(n){if(!l)return void o("failure",u=n);m(n,t)}}function v(){clearTimeout(c),o("t",c=setTimeout(y,100))}var g,k;s(n,$,t=>{o("$routeInfo",r=t)}),_(()=>{o("ctx",i=document.querySelector('[data-svero="ctx"]').parentElement),o("ctxLoaded",f=!0),v()}),g="__svero__",k={routeInfo:$,assignRoute:function(t,n,e){const r={key:t=t||Math.random().toString(36).substr(2),...e};let c;return X.mount(p,()=>{c=X.add(Y(n),r),o("fallback",l=r.fallback&&t||l)}),v(),[t,c]},unassignRoute:function(t){X.mount(p,()=>{X.rm(Y(t))}),v()}},x().$$.context.set(g,k);let{$$slots:b={},$$scope:w}=e;return n.$set=t=>{"path"in t&&o("path",p=t.path),"nofallback"in t&&o("nofallback",d=t.nofallback),"$$scope"in t&&o("$$scope",w=t.$$scope)},{failure:u,ctxLoaded:f,path:p,nofallback:d,routeInfo:$,handlePopState:y,$$slots:b,$$scope:w}}class tt extends z{constructor(t){var n;super(),document.getElementById("svelte-h7mijx-style")||((n=$("style")).id="svelte-h7mijx-style",n.textContent=".ctx.svelte-h7mijx{display:none}",f(document.head,n)),U(this,t,Z,W,a,["path","nofallback"])}}const nt=({router:t})=>({router:t}),et=({router:t})=>({router:t});function ot(t){var n,e,o,r,c=[ct,rt],a=[];function s(t){return t.component?0:1}return n=s(t),e=a[n]=c[n](t),{c(){e.c(),o=y()},m(t,e){a[n].m(t,e),p(t,o,e),r=!0},p(t,r){var i=n;(n=s(r))===i?a[n].p(t,r):(A(),q(()=>{a[i].d(1),a[i]=null}),e.o(1),P(),(e=a[n])||(e=a[n]=c[n](r)).c(),e.i(1),e.m(o.parentNode,o))},i(t){r||(e&&e.i(),r=!0)},o(t){e&&e.o(),r=!1},d(t){a[n].d(t),t&&d(o)}}}function rt(t){var n;const e=t.$$slots.default,o=i(e,t,et);return{c(){o&&o.c()},l(t){o&&o.l(t)},m(t,e){o&&o.m(t,e),n=!0},p(t,n){o&&o.p&&(t.$$scope||t.router)&&o.p(l(e,n,t,nt),u(e,n,et))},i(t){n||(o&&o.i&&o.i(t),n=!0)},o(t){o&&o.o&&o.o(t),n=!1},d(t){o&&o.d(t)}}}function ct(t){var n,e,o=t.component;function r(t){return{props:{router:t.router}}}if(o)var c=new o(r(t));return{c(){c&&c.$$.fragment.c(),n=y()},m(t,o){c&&B(c,t,o),p(t,n,o),e=!0},p(t,e){var a={};if(t.router&&(a.router=e.router),o!==(o=e.component)){if(c){A();const t=c;q(()=>{t.$destroy()}),t.$$.fragment.o(1),P()}o?((c=new o(r(e))).$$.fragment.c(),c.$$.fragment.i(1),B(c,n.parentNode,n)):c=null}else o&&c.$set(a)},i(t){e||(c&&c.$$.fragment.i(t),e=!0)},o(t){c&&c.$$.fragment.o(t),e=!1},d(t){t&&d(n),c&&c.$destroy(t)}}}function at(t){var n,e,o=t.router&&ot(t);return{c(){o&&o.c(),n=y()},m(t,r){o&&o.m(t,r),p(t,n,r),e=!0},p(t,e){e.router?o?(o.p(t,e),o.i(1)):((o=ot(e)).c(),o.i(1),o.m(n.parentNode,n)):o&&(A(),q(()=>{o.d(1),o=null}),o.o(1),P())},i(t){e||(o&&o.i(),e=!0)},o(t){o&&o.o(),e=!1},d(t){o&&o.d(t),t&&d(n)}}}function st(t,n,e){let o;const{assignRoute:r,unassignRoute:c,routeInfo:a}=function(t){return x().$$.context.get(t)}("__svero__");s(t,a,t=>{e("$routeInfo",o=t)});let i,{key:u=null,path:l="",exact:f,fallback:p,component:d,condition:$,redirect:h}=n;var m;_(()=>{[u,i]=r(u,l,{condition:$,redirect:h,fallback:p,exact:f}),e("key",u),e("fullpath",i)}),m=()=>{c(i)},x().$$.on_destroy.push(m);let y,{$$slots:v={},$$scope:g}=n;return t.$set=t=>{"key"in t&&e("key",u=t.key),"path"in t&&e("path",l=t.path),"exact"in t&&e("exact",f=t.exact),"fallback"in t&&e("fallback",p=t.fallback),"component"in t&&e("component",d=t.component),"condition"in t&&e("condition",$=t.condition),"redirect"in t&&e("redirect",h=t.redirect),"$$scope"in t&&e("$$scope",g=t.$$scope)},t.$$.update=(t={$routeInfo:1,key:1})=>{(t.$routeInfo||t.key)&&e("router",y=o[u])},{routeInfo:a,key:u,path:l,exact:f,fallback:p,component:d,condition:$,redirect:h,router:y,$$slots:v,$$scope:g}}class it extends z{constructor(t){super(),U(this,t,st,at,a,["key","path","exact","fallback","component","condition","redirect"])}}function ut(t){var n,e,o;const r=t.$$slots.default,c=i(r,t,null);return{c(){var e;n=$("a"),c&&c.c(),n.href=t.href,n.className=t.className,o=v(n,"click",(e=t.onClick,function(t){return t.preventDefault(),e.call(this,t)}))},l(t){c&&c.l(a_nodes)},m(t,o){p(t,n,o),c&&c.m(n,null),e=!0},p(t,o){c&&c.p&&t.$$scope&&c.p(l(r,o,t,null),u(r,o,null)),e&&!t.href||(n.href=o.href),e&&!t.className||(n.className=o.className)},i(t){e||(c&&c.i&&c.i(t),e=!0)},o(t){c&&c.o&&c.o(t),e=!1},d(t){t&&d(n),c&&c.d(t),o()}}}function lt(t,n,e){let{class:o="",href:r="/",className:c=""}=n;_(()=>{e("className",c=c||o)});const a=w();let{$$slots:s={},$$scope:i}=n;return t.$set=t=>{"class"in t&&e("cssClass",o=t.class),"href"in t&&e("href",r=t.href),"className"in t&&e("className",c=t.className),"$$scope"in t&&e("$$scope",i=t.$$scope)},{cssClass:o,href:r,className:c,onClick:function(t){let n=r;"/"!==n.charAt()&&(n=window.location.pathname+n),K(n),a("click",t)},$$slots:s,$$scope:i}}class ft extends z{constructor(t){super(),U(this,t,lt,ut,a,["class","href","className"])}}export{ft as Link,it as Route,tt as Router,K as navigateTo};
+function noop() { }
+function assign(tar, src) {
+    for (const k in src)
+        tar[k] = src[k];
+    return tar;
+}
+function add_location(element, file, line, column, char) {
+    element.__svelte_meta = {
+        loc: { file, line, column, char }
+    };
+}
+function run(fn) {
+    return fn();
+}
+function blank_object() {
+    return Object.create(null);
+}
+function run_all(fns) {
+    fns.forEach(run);
+}
+function is_function(thing) {
+    return typeof thing === 'function';
+}
+function safe_not_equal(a, b) {
+    return a != a ? b == b : a !== b || ((a && typeof a === 'object') || typeof a === 'function');
+}
+function validate_store(store, name) {
+    if (!store || typeof store.subscribe !== 'function') {
+        throw new Error(`'${name}' is not a store with a 'subscribe' method`);
+    }
+}
+function subscribe(component, store, callback) {
+    const unsub = store.subscribe(callback);
+    component.$$.on_destroy.push(unsub.unsubscribe
+        ? () => unsub.unsubscribe()
+        : unsub);
+}
+function create_slot(definition, ctx, fn) {
+    if (definition) {
+        const slot_ctx = get_slot_context(definition, ctx, fn);
+        return definition[0](slot_ctx);
+    }
+}
+function get_slot_context(definition, ctx, fn) {
+    return definition[1]
+        ? assign({}, assign(ctx.$$scope.ctx, definition[1](fn ? fn(ctx) : {})))
+        : ctx.$$scope.ctx;
+}
+function get_slot_changes(definition, ctx, changed, fn) {
+    return definition[1]
+        ? assign({}, assign(ctx.$$scope.changed || {}, definition[1](fn ? fn(changed) : {})))
+        : ctx.$$scope.changed || {};
+}
+
+function append(target, node) {
+    target.appendChild(node);
+}
+function insert(target, node, anchor) {
+    target.insertBefore(node, anchor || null);
+}
+function detach(node) {
+    node.parentNode.removeChild(node);
+}
+function element(name) {
+    return document.createElement(name);
+}
+function text(data) {
+    return document.createTextNode(data);
+}
+function space() {
+    return text(' ');
+}
+function empty() {
+    return text('');
+}
+function listen(node, event, handler, options) {
+    node.addEventListener(event, handler, options);
+    return () => node.removeEventListener(event, handler, options);
+}
+function prevent_default(fn) {
+    return function (event) {
+        event.preventDefault();
+        // @ts-ignore
+        return fn.call(this, event);
+    };
+}
+function children(element) {
+    return Array.from(element.childNodes);
+}
+function set_data(text, data) {
+    data = '' + data;
+    if (text.data !== data)
+        text.data = data;
+}
+function custom_event(type, detail) {
+    const e = document.createEvent('CustomEvent');
+    e.initCustomEvent(type, false, false, detail);
+    return e;
+}
+
+let current_component;
+function set_current_component(component) {
+    current_component = component;
+}
+function get_current_component() {
+    if (!current_component)
+        throw new Error(`Function called outside component initialization`);
+    return current_component;
+}
+function onMount(fn) {
+    get_current_component().$$.on_mount.push(fn);
+}
+function onDestroy(fn) {
+    get_current_component().$$.on_destroy.push(fn);
+}
+function createEventDispatcher() {
+    const component = current_component;
+    return (type, detail) => {
+        const callbacks = component.$$.callbacks[type];
+        if (callbacks) {
+            // TODO are there situations where events could be dispatched
+            // in a server (non-DOM) environment?
+            const event = custom_event(type, detail);
+            callbacks.slice().forEach(fn => {
+                fn.call(component, event);
+            });
+        }
+    };
+}
+function setContext(key, context) {
+    get_current_component().$$.context.set(key, context);
+}
+function getContext(key) {
+    return get_current_component().$$.context.get(key);
+}
+
+const dirty_components = [];
+const resolved_promise = Promise.resolve();
+let update_scheduled = false;
+const binding_callbacks = [];
+const render_callbacks = [];
+const flush_callbacks = [];
+function schedule_update() {
+    if (!update_scheduled) {
+        update_scheduled = true;
+        resolved_promise.then(flush);
+    }
+}
+function add_render_callback(fn) {
+    render_callbacks.push(fn);
+}
+function flush() {
+    const seen_callbacks = new Set();
+    do {
+        // first, call beforeUpdate functions
+        // and update components
+        while (dirty_components.length) {
+            const component = dirty_components.shift();
+            set_current_component(component);
+            update(component.$$);
+        }
+        while (binding_callbacks.length)
+            binding_callbacks.shift()();
+        // then, once components are updated, call
+        // afterUpdate functions. This may cause
+        // subsequent updates...
+        while (render_callbacks.length) {
+            const callback = render_callbacks.pop();
+            if (!seen_callbacks.has(callback)) {
+                callback();
+                // ...so guard against infinite loops
+                seen_callbacks.add(callback);
+            }
+        }
+    } while (dirty_components.length);
+    while (flush_callbacks.length) {
+        flush_callbacks.pop()();
+    }
+    update_scheduled = false;
+}
+function update($$) {
+    if ($$.fragment) {
+        $$.update($$.dirty);
+        run_all($$.before_render);
+        $$.fragment.p($$.dirty, $$.ctx);
+        $$.dirty = null;
+        $$.after_render.forEach(add_render_callback);
+    }
+}
+let outros;
+function group_outros() {
+    outros = {
+        remaining: 0,
+        callbacks: []
+    };
+}
+function check_outros() {
+    if (!outros.remaining) {
+        run_all(outros.callbacks);
+    }
+}
+function on_outro(callback) {
+    outros.callbacks.push(callback);
+}
+function mount_component(component, target, anchor) {
+    const { fragment, on_mount, on_destroy, after_render } = component.$$;
+    fragment.m(target, anchor);
+    // onMount happens after the initial afterUpdate. Because
+    // afterUpdate callbacks happen in reverse order (inner first)
+    // we schedule onMount callbacks before afterUpdate callbacks
+    add_render_callback(() => {
+        const new_on_destroy = on_mount.map(run).filter(is_function);
+        if (on_destroy) {
+            on_destroy.push(...new_on_destroy);
+        }
+        else {
+            // Edge case - component was destroyed immediately,
+            // most likely as a result of a binding initialising
+            run_all(new_on_destroy);
+        }
+        component.$$.on_mount = [];
+    });
+    after_render.forEach(add_render_callback);
+}
+function destroy(component, detaching) {
+    if (component.$$) {
+        run_all(component.$$.on_destroy);
+        component.$$.fragment.d(detaching);
+        // TODO null out other refs, including component.$$ (but need to
+        // preserve final state?)
+        component.$$.on_destroy = component.$$.fragment = null;
+        component.$$.ctx = {};
+    }
+}
+function make_dirty(component, key) {
+    if (!component.$$.dirty) {
+        dirty_components.push(component);
+        schedule_update();
+        component.$$.dirty = blank_object();
+    }
+    component.$$.dirty[key] = true;
+}
+function init(component, options, instance, create_fragment, not_equal$$1, prop_names) {
+    const parent_component = current_component;
+    set_current_component(component);
+    const props = options.props || {};
+    const $$ = component.$$ = {
+        fragment: null,
+        ctx: null,
+        // state
+        props: prop_names,
+        update: noop,
+        not_equal: not_equal$$1,
+        bound: blank_object(),
+        // lifecycle
+        on_mount: [],
+        on_destroy: [],
+        before_render: [],
+        after_render: [],
+        context: new Map(parent_component ? parent_component.$$.context : []),
+        // everything else
+        callbacks: blank_object(),
+        dirty: null
+    };
+    let ready = false;
+    $$.ctx = instance
+        ? instance(component, props, (key, value) => {
+            if ($$.ctx && not_equal$$1($$.ctx[key], $$.ctx[key] = value)) {
+                if ($$.bound[key])
+                    $$.bound[key](value);
+                if (ready)
+                    make_dirty(component, key);
+            }
+        })
+        : props;
+    $$.update();
+    ready = true;
+    run_all($$.before_render);
+    $$.fragment = create_fragment($$.ctx);
+    if (options.target) {
+        if (options.hydrate) {
+            $$.fragment.l(children(options.target));
+        }
+        else {
+            $$.fragment.c();
+        }
+        if (options.intro && component.$$.fragment.i)
+            component.$$.fragment.i();
+        mount_component(component, options.target, options.anchor);
+        flush();
+    }
+    set_current_component(parent_component);
+}
+class SvelteComponent {
+    $destroy() {
+        destroy(this, true);
+        this.$destroy = noop;
+    }
+    $on(type, callback) {
+        const callbacks = (this.$$.callbacks[type] || (this.$$.callbacks[type] = []));
+        callbacks.push(callback);
+        return () => {
+            const index = callbacks.indexOf(callback);
+            if (index !== -1)
+                callbacks.splice(index, 1);
+        };
+    }
+    $set() {
+        // overridden by instance, if it has props
+    }
+}
+class SvelteComponentDev extends SvelteComponent {
+    constructor(options) {
+        if (!options || (!options.target && !options.$$inline)) {
+            throw new Error(`'target' is a required option`);
+        }
+        super();
+    }
+    $destroy() {
+        super.$destroy();
+        this.$destroy = () => {
+            console.warn(`Component was already destroyed`); // eslint-disable-line no-console
+        };
+    }
+}
+
+var defaultExport = /*@__PURE__*/(function (Error) {
+  function defaultExport(route, path) {
+    var message = "Unreachable '" + route + "', segment '" + path + "' is not defined";
+    Error.call(this, message);
+    this.message = message;
+  }
+
+  if ( Error ) defaultExport.__proto__ = Error;
+  defaultExport.prototype = Object.create( Error && Error.prototype );
+  defaultExport.prototype.constructor = defaultExport;
+
+  return defaultExport;
+}(Error));
+
+function buildMatcher(path, parent) {
+  var regex;
+
+  var _isSplat;
+
+  var _priority = -100;
+
+  var keys = [];
+  regex = path.replace(/[-$.]/g, '\\$&').replace(/\(/g, '(?:').replace(/\)/g, ')?').replace(/([:*]\w+)(?:<([^<>]+?)>)?/g, function (_, key, expr) {
+    keys.push(key.substr(1));
+
+    if (key.charAt() === ':') {
+      _priority += 100;
+      return ("((?!#)" + (expr || '[^/]+?') + ")");
+    }
+
+    _isSplat = true;
+    _priority += 500;
+    return ("((?!#)" + (expr || '.+?') + ")");
+  });
+
+  try {
+    regex = new RegExp(("^" + regex + "$"));
+  } catch (e) {
+    throw new TypeError(("Invalid route expression, given '" + parent + "'"));
+  }
+
+  var _hashed = path.includes('#') ? 0.5 : 1;
+
+  var _depth = path.length * _priority * _hashed;
+
+  return {
+    keys: keys,
+    regex: regex,
+    _depth: _depth,
+    _isSplat: _isSplat
+  };
+}
+var PathMatcher = function PathMatcher(path, parent) {
+  var ref = buildMatcher(path, parent);
+  var keys = ref.keys;
+  var regex = ref.regex;
+  var _depth = ref._depth;
+  var _isSplat = ref._isSplat;
+  return {
+    _isSplat: _isSplat,
+    _depth: _depth,
+    match: function (value) {
+      var matches = value.match(regex);
+
+      if (matches) {
+        return keys.reduce(function (prev, cur, i) {
+          prev[cur] = typeof matches[i + 1] === 'string' ? decodeURIComponent(matches[i + 1]) : null;
+          return prev;
+        }, {});
+      }
+    }
+  };
+};
+
+PathMatcher.push = function push (key, prev, leaf, parent) {
+  var root = prev[key] || (prev[key] = {});
+
+  if (!root.pattern) {
+    root.pattern = new PathMatcher(key, parent);
+    root.route = leaf || '/';
+  }
+
+  prev.keys = prev.keys || [];
+
+  if (!prev.keys.includes(key)) {
+    prev.keys.push(key);
+    PathMatcher.sort(prev);
+  }
+
+  return root;
+};
+
+PathMatcher.sort = function sort (root) {
+  root.keys.sort(function (a, b) {
+    return root[a].pattern._depth - root[b].pattern._depth;
+  });
+};
+
+function merge(path, parent) {
+  return ("" + (parent && parent !== '/' ? parent : '') + (path || ''));
+}
+function walk(path, cb) {
+  var matches = path.match(/<[^<>]*\/[^<>]*>/);
+
+  if (matches) {
+    throw new TypeError(("RegExp cannot contain slashes, given '" + matches + "'"));
+  }
+
+  var parts = path !== '/' ? path.split('/') : [''];
+  var root = [];
+  parts.some(function (x, i) {
+    var parent = root.concat(x).join('/') || null;
+    var segment = parts.slice(i + 1).join('/') || null;
+    var retval = cb(("/" + x), parent, segment ? ((x ? ("/" + x) : '') + "/" + segment) : null);
+    root.push(x);
+    return retval;
+  });
+}
+function reduce(key, root, _seen) {
+  var params = {};
+  var out = [];
+  var splat;
+  walk(key, function (x, leaf, extra) {
+    var found;
+
+    if (!root.keys) {
+      throw new defaultExport(key, x);
+    }
+
+    root.keys.some(function (k) {
+      if (_seen.includes(k)) { return false; }
+      var ref = root[k].pattern;
+      var match = ref.match;
+      var _isSplat = ref._isSplat;
+      var matches = match(_isSplat ? extra || x : x);
+
+      if (matches) {
+        Object.assign(params, matches);
+
+        if (root[k].route) {
+          out.push(Object.assign({}, root[k].info, {
+            matches: x === leaf || _isSplat || !extra,
+            params: Object.assign({}, params),
+            route: root[k].route,
+            path: _isSplat ? extra : leaf || x
+          }));
+        }
+
+        if (extra === null && !root[k].keys) {
+          return true;
+        }
+
+        if (k !== '/') { _seen.push(k); }
+        splat = _isSplat;
+        root = root[k];
+        found = true;
+        return true;
+      }
+
+      return false;
+    });
+
+    if (!(found || root.keys.some(function (k) { return root[k].pattern.match(x); }))) {
+      throw new defaultExport(key, x);
+    }
+
+    return splat || !found;
+  });
+  return out;
+}
+function find(path, routes, retries) {
+  var get = reduce.bind(null, path, routes);
+  var set = [];
+
+  while (retries > 0) {
+    retries -= 1;
+
+    try {
+      return get(set);
+    } catch (e) {
+      if (retries > 0) {
+        return get(set);
+      }
+
+      throw e;
+    }
+  }
+}
+function add(path, routes, parent, routeInfo) {
+  var fullpath = merge(path, parent);
+  var root = routes;
+  walk(fullpath, function (x, leaf) {
+    root = PathMatcher.push(x, root, leaf, fullpath);
+
+    if (x !== '/') {
+      root.info = root.info || Object.assign({}, routeInfo);
+    }
+  });
+  root.info = root.info || Object.assign({}, routeInfo);
+  return fullpath;
+}
+function rm(path, routes, parent) {
+  var fullpath = merge(path, parent);
+  var root = routes;
+  var leaf = null;
+  var key = null;
+  walk(fullpath, function (x) {
+    if (!root) {
+      leaf = null;
+      return true;
+    }
+
+    key = x;
+    leaf = x === '/' ? routes['/'] : root;
+
+    if (!leaf.keys) {
+      throw new defaultExport(path, x);
+    }
+
+    root = root[x];
+  });
+
+  if (!(leaf && key)) {
+    throw new defaultExport(path, key);
+  }
+
+  delete leaf[key];
+
+  if (key === '/') {
+    delete leaf.info;
+    delete leaf.route;
+  }
+
+  var offset = leaf.keys.indexOf(key);
+
+  if (offset !== -1) {
+    leaf.keys.splice(leaf.keys.indexOf(key), 1);
+    PathMatcher.sort(leaf);
+  }
+}
+
+var Router = function Router() {
+  var routes = {};
+  var stack = [];
+  return {
+    mount: function (path, cb) {
+      if (path !== '/') {
+        stack.push(path);
+      }
+
+      cb();
+      stack.pop();
+    },
+    find: function (path, retries) { return find(path, routes, retries === true ? 2 : retries || 1); },
+    add: function (path, routeInfo) { return add(path, routes, stack.join(''), routeInfo); },
+    rm: function (path) { return rm(path, routes, stack.join('')); }
+  };
+};
+
+function navigateTo(path) {
+  // If path empty or no string, throws error
+  if (!path || typeof path !== 'string') {
+    throw Error(`svero expects navigateTo() to have a string parameter. The parameter provided was: ${path} of type ${typeof path} instead.`);
+  }
+
+  if (path[0] !== '/' && path[0] !== '#') {
+    throw Error(`svero expects navigateTo() param to start with slash or hash, e.g. "/${path}" or "#${path}" instead of "${path}".`);
+  }
+
+  // If no History API support, fallbacks to URL redirect
+  if (!history.pushState || !window.dispatchEvent) {
+    window.location.href = path;
+    return;
+  }
+
+  // If has History API support, uses it
+  history.pushState({}, '', path);
+  window.dispatchEvent(new Event('popstate'));
+}
+
+/**
+ * Create a `Writable` store that allows both updating and reading by subscription.
+ * @param {*=}value initial value
+ * @param {StartStopNotifier=}start start and stop notifications for subscriptions
+ */
+function writable(value, start = noop) {
+    let stop;
+    const subscribers = [];
+    function set(new_value) {
+        if (safe_not_equal(value, new_value)) {
+            value = new_value;
+            if (!stop) {
+                return; // not ready
+            }
+            subscribers.forEach((s) => s[1]());
+            subscribers.forEach((s) => s[0](value));
+        }
+    }
+    function update(fn) {
+        set(fn(value));
+    }
+    function subscribe(run, invalidate = noop) {
+        const subscriber = [run, invalidate];
+        subscribers.push(subscriber);
+        if (subscribers.length === 1) {
+            stop = start(set) || noop;
+        }
+        run(value);
+        return () => {
+            const index = subscribers.indexOf(subscriber);
+            if (index !== -1) {
+                subscribers.splice(index, 1);
+            }
+            if (subscribers.length === 0) {
+                stop();
+            }
+        };
+    }
+    return { set, update, subscribe };
+}
+
+/* src/Router.svelte generated by Svelte v3.4.4 */
+
+const file = "src/Router.svelte";
+
+function add_css() {
+	var style = element("style");
+	style.id = 'svelte-h7mijx-style';
+	style.textContent = ".ctx.svelte-h7mijx{display:none}\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiUm91dGVyLnN2ZWx0ZSIsInNvdXJjZXMiOlsiUm91dGVyLnN2ZWx0ZSJdLCJzb3VyY2VzQ29udGVudCI6WyI8c2NyaXB0IGNvbnRleHQ9XCJtb2R1bGVcIj5cbiAgaW1wb3J0IFJvdXRlciBmcm9tICdhYnN0cmFjdC1uZXN0ZWQtcm91dGVyJztcbiAgaW1wb3J0IHsgbmF2aWdhdGVUbyB9IGZyb20gJy4vdXRpbHMnO1xuXG4gIGNvbnN0IHJvdXRlciA9IG5ldyBSb3V0ZXIoKTtcbjwvc2NyaXB0PlxuXG48c2NyaXB0PlxuICBpbXBvcnQgeyB3cml0YWJsZSB9IGZyb20gJ3N2ZWx0ZS9zdG9yZSc7XG4gIGltcG9ydCB7IG9uTW91bnQsIGdldENvbnRleHQsIHNldENvbnRleHQgfSBmcm9tICdzdmVsdGUnO1xuXG4gIGxldCB0O1xuICBsZXQgY3R4O1xuICBsZXQgZmFpbHVyZTtcbiAgbGV0IGZhbGxiYWNrO1xuICBsZXQgY3R4TG9hZGVkID0gZmFsc2U7XG5cbiAgZXhwb3J0IGxldCBwYXRoID0gJy8nO1xuICBleHBvcnQgbGV0IG5vZmFsbGJhY2sgPSBudWxsO1xuXG4gIGNvbnN0IHJvdXRlSW5mbyA9IHdyaXRhYmxlKHt9KTtcblxuICBmdW5jdGlvbiBjbGVhblBhdGgocm91dGUpIHtcbiAgICByZXR1cm4gcm91dGUucmVwbGFjZSgvXFw/W14jXSovLCAnJykucmVwbGFjZSgvKD8hXilcXC8jLywgJyMnKS5yZXBsYWNlKCcvIycsICcjJykucmVwbGFjZSgvXFwvJC8sICcnKTtcbiAgfVxuXG4gIGZ1bmN0aW9uIGZpeFBhdGgocm91dGUpIHtcbiAgICBpZiAocm91dGUgPT09ICcvIyonIHx8IHJvdXRlID09PSAnIyonKSByZXR1cm4gJyMqXyc7XG4gICAgaWYgKHJvdXRlID09PSAnLyonIHx8IHJvdXRlID09PSAnKicpIHJldHVybiAnLypfJztcbiAgICByZXR1cm4gcm91dGU7XG4gIH1cblxuICBmdW5jdGlvbiBoYW5kbGVSb3V0ZXMobWFwKSB7XG4gICAgY29uc3QgcGFyYW1zID0gbWFwLnJlZHVjZSgocHJldiwgY3VyKSA9PiB7XG4gICAgICBwcmV2W2N1ci5rZXldID0gT2JqZWN0LmFzc2lnbihwcmV2W2N1ci5rZXldIHx8IHt9LCBjdXIucGFyYW1zKTtcbiAgICAgIHJldHVybiBwcmV2O1xuICAgIH0sIHt9KTtcblxuICAgIGxldCBza2lwO1xuICAgIGxldCByb3V0ZXMgPSB7fTtcblxuICAgIG1hcC5zb21lKHggPT4ge1xuICAgICAgaWYgKHR5cGVvZiB4LmNvbmRpdGlvbiA9PT0gJ2Jvb2xlYW4nIHx8IHR5cGVvZiB4LmNvbmRpdGlvbiA9PT0gJ2Z1bmN0aW9uJykge1xuICAgICAgICBjb25zdCBvayA9IHR5cGVvZiB4LmNvbmRpdGlvbiA9PT0gJ2Z1bmN0aW9uJyA/IHguY29uZGl0aW9uKCkgOiB4LmNvbmRpdGlvbjtcblxuICAgICAgICBpZiAob2sgPT09IGZhbHNlICYmIHgucmVkaXJlY3QpIHtcbiAgICAgICAgICBuYXZpZ2F0ZVRvKHgucmVkaXJlY3QpO1xuICAgICAgICAgIHNraXAgPSB0cnVlO1xuICAgICAgICAgIHJldHVybiB0cnVlO1xuICAgICAgICB9XG4gICAgICB9XG5cbiAgICAgIGlmICh4LmtleSAmJiAhcm91dGVzW3gua2V5XSkge1xuICAgICAgICBpZiAoeC5leGFjdCAmJiAheC5tYXRjaGVzKSByZXR1cm4gZmFsc2U7XG4gICAgICAgIHJvdXRlc1t4LmtleV0gPSB7IC4uLngsIHBhcmFtczogcGFyYW1zW3gua2V5XSB9O1xuICAgICAgfVxuXG4gICAgICByZXR1cm4gZmFsc2U7XG4gICAgfSk7XG5cbiAgICBpZiAoIXNraXApIHtcbiAgICAgICRyb3V0ZUluZm8gPSByb3V0ZXM7XG4gICAgfVxuICB9XG5cbiAgZnVuY3Rpb24gZG9GYWxsYmFjayhlLCBwYXRoKSB7XG4gICAgJHJvdXRlSW5mb1tmYWxsYmFja10gPSB7IGZhaWx1cmU6IGUsIHBhcmFtczogeyBfOiBwYXRoLnN1YnN0cigxKSB9IH07XG4gIH1cblxuICBmdW5jdGlvbiByZXNvbHZlUm91dGVzKHBhdGgpIHtcbiAgICBjb25zdCBzZWdtZW50cyA9IHBhdGguc3BsaXQoJyMnKVswXS5zcGxpdCgnLycpO1xuICAgIGNvbnN0IHByZWZpeCA9IFtdO1xuICAgIGNvbnN0IG1hcCA9IFtdO1xuXG4gICAgc2VnbWVudHMuZm9yRWFjaChrZXkgPT4ge1xuICAgICAgY29uc3Qgc3ViID0gcHJlZml4LmNvbmNhdChgLyR7a2V5fWApLmpvaW4oJycpO1xuXG4gICAgICBpZiAoa2V5KSBwcmVmaXgucHVzaChgLyR7a2V5fWApO1xuXG4gICAgICB0cnkge1xuICAgICAgICBjb25zdCBuZXh0ID0gcm91dGVyLmZpbmQoc3ViKTtcblxuICAgICAgICBoYW5kbGVSb3V0ZXMobmV4dCk7XG4gICAgICAgIG1hcC5wdXNoKC4uLm5leHQpO1xuICAgICAgfSBjYXRjaCAoZV8pIHtcbiAgICAgICAgZG9GYWxsYmFjayhlXywgcGF0aCk7XG4gICAgICB9XG4gICAgfSk7XG5cbiAgICByZXR1cm4gbWFwO1xuICB9XG5cbiAgZnVuY3Rpb24gaGFuZGxlUG9wU3RhdGUoKSB7XG4gICAgY29uc3QgZnVsbHBhdGggPSBjbGVhblBhdGgoYC8ke2xvY2F0aW9uLmhyZWYuc3BsaXQoJy8nKS5zbGljZSgzKS5qb2luKCcvJyl9YCk7XG5cbiAgICB0cnkge1xuICAgICAgY29uc3QgZm91bmQgPSByZXNvbHZlUm91dGVzKGZ1bGxwYXRoKTtcblxuICAgICAgaWYgKGZ1bGxwYXRoLmluY2x1ZGVzKCcjJykpIHtcbiAgICAgICAgaGFuZGxlUm91dGVzKGZvdW5kLmNvbmNhdChyb3V0ZXIuZmluZChmdWxscGF0aCkpKTtcbiAgICAgIH1cbiAgICB9IGNhdGNoIChlKSB7XG4gICAgICBpZiAoIWZhbGxiYWNrKSB7XG4gICAgICAgIGZhaWx1cmUgPSBlO1xuICAgICAgICByZXR1cm47XG4gICAgICB9XG5cbiAgICAgIGRvRmFsbGJhY2soZSwgZnVsbHBhdGgpO1xuICAgIH1cbiAgfVxuXG4gIGZ1bmN0aW9uIGRlYm91bmNlZEhhbmRsZVBvcFN0YXRlKCkge1xuICAgIGNsZWFyVGltZW91dCh0KTtcbiAgICB0ID0gc2V0VGltZW91dChoYW5kbGVQb3BTdGF0ZSwgMTAwKTtcbiAgfVxuXG4gIGZ1bmN0aW9uIGFzc2lnblJvdXRlKGtleSwgcm91dGUsIHJvdXRlSW5mbykge1xuICAgIGtleSA9IGtleSB8fCBNYXRoLnJhbmRvbSgpLnRvU3RyaW5nKDM2KS5zdWJzdHIoMik7XG5cbiAgICBjb25zdCBoYW5kbGVyID0geyBrZXksIC4uLnJvdXRlSW5mbyB9O1xuXG4gICAgbGV0IGZ1bGxwYXRoO1xuXG4gICAgcm91dGVyLm1vdW50KHBhdGgsICgpID0+IHtcbiAgICAgIGZ1bGxwYXRoID0gcm91dGVyLmFkZChmaXhQYXRoKHJvdXRlKSwgaGFuZGxlcik7XG4gICAgICBmYWxsYmFjayA9IChoYW5kbGVyLmZhbGxiYWNrICYmIGtleSkgfHwgZmFsbGJhY2s7XG4gICAgfSk7XG5cbiAgICBkZWJvdW5jZWRIYW5kbGVQb3BTdGF0ZSgpO1xuXG4gICAgcmV0dXJuIFtrZXksIGZ1bGxwYXRoXTtcbiAgfVxuXG4gIGZ1bmN0aW9uIHVuYXNzaWduUm91dGUocm91dGUpIHtcbiAgICByb3V0ZXIubW91bnQocGF0aCwgKCkgPT4ge1xuICAgICAgcm91dGVyLnJtKGZpeFBhdGgocm91dGUpKTtcbiAgICB9KTtcblxuICAgIGRlYm91bmNlZEhhbmRsZVBvcFN0YXRlKCk7XG4gIH1cblxuICBvbk1vdW50KCgpID0+IHtcbiAgICBjdHggPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKCdbZGF0YS1zdmVybz1cImN0eFwiXScpLnBhcmVudEVsZW1lbnQ7XG4gICAgY3R4TG9hZGVkID0gdHJ1ZTtcbiAgICBkZWJvdW5jZWRIYW5kbGVQb3BTdGF0ZSgpO1xuICB9KTtcblxuICBzZXRDb250ZXh0KCdfX3N2ZXJvX18nLCB7XG4gICAgcm91dGVJbmZvLFxuICAgIGFzc2lnblJvdXRlLFxuICAgIHVuYXNzaWduUm91dGUsXG4gIH0pO1xuPC9zY3JpcHQ+XG5cbjxzdHlsZT5cbiAgLmN0eCB7XG4gICAgZGlzcGxheTogbm9uZTtcbiAgfVxuPC9zdHlsZT5cblxuPHN2ZWx0ZTp3aW5kb3cgb246cG9wc3RhdGU9e2hhbmRsZVBvcFN0YXRlfT48L3N2ZWx0ZTp3aW5kb3c+XG5cbnsjaWYgIWN0eExvYWRlZH1cbiAgPGRpdiBjbGFzcz1cImN0eFwiIGRhdGEtc3Zlcm89XCJjdHhcIj48L2Rpdj5cbnsvaWZ9XG5cbnsjaWYgZmFpbHVyZSAmJiAhbm9mYWxsYmFja31cbiAgPGZpZWxkc2V0PlxuICAgIDxsZWdlbmQ+Um91dGVyIGZhaWx1cmU6IHtwYXRofTwvbGVnZW5kPlxuICAgIDxwcmU+e2ZhaWx1cmV9PC9wcmU+XG4gIDwvZmllbGRzZXQ+XG57L2lmfVxuXG48c2xvdCAvPlxuIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQTJKRSxJQUFJLGNBQUMsQ0FBQyxBQUNKLE9BQU8sQ0FBRSxJQUFJLEFBQ2YsQ0FBQyJ9 */";
+	append(document.head, style);
+}
+
+// (163:0) {#if !ctxLoaded}
+function create_if_block_1(ctx) {
+	var div;
+
+	return {
+		c: function create() {
+			div = element("div");
+			div.className = "ctx svelte-h7mijx";
+			div.dataset.svero = "ctx";
+			add_location(div, file, 163, 2, 3491);
+		},
+
+		m: function mount(target, anchor) {
+			insert(target, div, anchor);
+		},
+
+		d: function destroy(detaching) {
+			if (detaching) {
+				detach(div);
+			}
+		}
+	};
+}
+
+// (167:0) {#if failure && !nofallback}
+function create_if_block(ctx) {
+	var fieldset, legend, t0, t1, t2, pre, t3;
+
+	return {
+		c: function create() {
+			fieldset = element("fieldset");
+			legend = element("legend");
+			t0 = text("Router failure: ");
+			t1 = text(ctx.path);
+			t2 = space();
+			pre = element("pre");
+			t3 = text(ctx.failure);
+			add_location(legend, file, 168, 4, 3585);
+			add_location(pre, file, 169, 4, 3629);
+			add_location(fieldset, file, 167, 2, 3570);
+		},
+
+		m: function mount(target, anchor) {
+			insert(target, fieldset, anchor);
+			append(fieldset, legend);
+			append(legend, t0);
+			append(legend, t1);
+			append(fieldset, t2);
+			append(fieldset, pre);
+			append(pre, t3);
+		},
+
+		p: function update(changed, ctx) {
+			if (changed.path) {
+				set_data(t1, ctx.path);
+			}
+
+			if (changed.failure) {
+				set_data(t3, ctx.failure);
+			}
+		},
+
+		d: function destroy(detaching) {
+			if (detaching) {
+				detach(fieldset);
+			}
+		}
+	};
+}
+
+function create_fragment(ctx) {
+	var t0, t1, current, dispose;
+
+	var if_block0 = (!ctx.ctxLoaded) && create_if_block_1();
+
+	var if_block1 = (ctx.failure && !ctx.nofallback) && create_if_block(ctx);
+
+	const default_slot_1 = ctx.$$slots.default;
+	const default_slot = create_slot(default_slot_1, ctx, null);
+
+	return {
+		c: function create() {
+			if (if_block0) if_block0.c();
+			t0 = space();
+			if (if_block1) if_block1.c();
+			t1 = space();
+
+			if (default_slot) default_slot.c();
+
+			dispose = listen(window, "popstate", ctx.handlePopState);
+		},
+
+		l: function claim(nodes) {
+			if (default_slot) default_slot.l(nodes);
+			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+		},
+
+		m: function mount(target, anchor) {
+			if (if_block0) if_block0.m(target, anchor);
+			insert(target, t0, anchor);
+			if (if_block1) if_block1.m(target, anchor);
+			insert(target, t1, anchor);
+
+			if (default_slot) {
+				default_slot.m(target, anchor);
+			}
+
+			current = true;
+		},
+
+		p: function update(changed, ctx) {
+			if (!ctx.ctxLoaded) {
+				if (!if_block0) {
+					if_block0 = create_if_block_1();
+					if_block0.c();
+					if_block0.m(t0.parentNode, t0);
+				}
+			} else if (if_block0) {
+				if_block0.d(1);
+				if_block0 = null;
+			}
+
+			if (ctx.failure && !ctx.nofallback) {
+				if (if_block1) {
+					if_block1.p(changed, ctx);
+				} else {
+					if_block1 = create_if_block(ctx);
+					if_block1.c();
+					if_block1.m(t1.parentNode, t1);
+				}
+			} else if (if_block1) {
+				if_block1.d(1);
+				if_block1 = null;
+			}
+
+			if (default_slot && default_slot.p && changed.$$scope) {
+				default_slot.p(get_slot_changes(default_slot_1, ctx, changed, null), get_slot_context(default_slot_1, ctx, null));
+			}
+		},
+
+		i: function intro(local) {
+			if (current) return;
+			if (default_slot && default_slot.i) default_slot.i(local);
+			current = true;
+		},
+
+		o: function outro(local) {
+			if (default_slot && default_slot.o) default_slot.o(local);
+			current = false;
+		},
+
+		d: function destroy(detaching) {
+			if (if_block0) if_block0.d(detaching);
+
+			if (detaching) {
+				detach(t0);
+			}
+
+			if (if_block1) if_block1.d(detaching);
+
+			if (detaching) {
+				detach(t1);
+			}
+
+			if (default_slot) default_slot.d(detaching);
+			dispose();
+		}
+	};
+}
+
+
+
+const router = new Router();
+
+function cleanPath(route) {
+  return route.replace(/\?[^#]*/, '').replace(/(?!^)\/#/, '#').replace('/#', '#').replace(/\/$/, '');
+}
+
+function fixPath(route) {
+  if (route === '/#*' || route === '#*') return '#*_';
+  if (route === '/*' || route === '*') return '/*_';
+  return route;
+}
+
+function instance($$self, $$props, $$invalidate) {
+	let $routeInfo;
+
+	
+
+  let t;
+  let ctx;
+  let failure;
+  let fallback;
+  let ctxLoaded = false;
+
+  let { path = '/', nofallback = null } = $$props;
+
+  const routeInfo = writable({}); validate_store(routeInfo, 'routeInfo'); subscribe($$self, routeInfo, $$value => { $routeInfo = $$value; $$invalidate('$routeInfo', $routeInfo); });
+
+  function handleRoutes(map) {
+    const params = map.reduce((prev, cur) => {
+      prev[cur.key] = Object.assign(prev[cur.key] || {}, cur.params);
+      return prev;
+    }, {});
+
+    let skip;
+    let routes = {};
+
+    map.some(x => {
+      if (typeof x.condition === 'boolean' || typeof x.condition === 'function') {
+        const ok = typeof x.condition === 'function' ? x.condition() : x.condition;
+
+        if (ok === false && x.redirect) {
+          navigateTo(x.redirect);
+          skip = true;
+          return true;
+        }
+      }
+
+      if (x.key && !routes[x.key]) {
+        if (x.exact && !x.matches) return false;
+        routes[x.key] = { ...x, params: params[x.key] };
+      }
+
+      return false;
+    });
+
+    if (!skip) {
+      $routeInfo = routes; routeInfo.set($routeInfo);
+    }
+  }
+
+  function doFallback(e, path) {
+    $routeInfo[fallback] = { failure: e, params: { _: path.substr(1) } }; routeInfo.set($routeInfo);
+  }
+
+  function resolveRoutes(path) {
+    const segments = path.split('#')[0].split('/');
+    const prefix = [];
+    const map = [];
+
+    segments.forEach(key => {
+      const sub = prefix.concat(`/${key}`).join('');
+
+      if (key) prefix.push(`/${key}`);
+
+      try {
+        const next = router.find(sub);
+
+        handleRoutes(next);
+        map.push(...next);
+      } catch (e_) {
+        doFallback(e_, path);
+      }
+    });
+
+    return map;
+  }
+
+  function handlePopState() {
+    const fullpath = cleanPath(`/${location.href.split('/').slice(3).join('/')}`);
+
+    try {
+      const found = resolveRoutes(fullpath);
+
+      if (fullpath.includes('#')) {
+        handleRoutes(found.concat(router.find(fullpath)));
+      }
+    } catch (e) {
+      if (!fallback) {
+        $$invalidate('failure', failure = e);
+        return;
+      }
+
+      doFallback(e, fullpath);
+    }
+  }
+
+  function debouncedHandlePopState() {
+    clearTimeout(t);
+    t = setTimeout(handlePopState, 100);
+  }
+
+  function assignRoute(key, route, routeInfo) {
+    key = key || Math.random().toString(36).substr(2);
+
+    const handler = { key, ...routeInfo };
+
+    let fullpath;
+
+    router.mount(path, () => {
+      fullpath = router.add(fixPath(route), handler);
+      fallback = (handler.fallback && key) || fallback;
+    });
+
+    debouncedHandlePopState();
+
+    return [key, fullpath];
+  }
+
+  function unassignRoute(route) {
+    router.mount(path, () => {
+      router.rm(fixPath(route));
+    });
+
+    debouncedHandlePopState();
+  }
+
+  onMount(() => {
+    ctx = document.querySelector('[data-svero="ctx"]').parentElement;
+    $$invalidate('ctxLoaded', ctxLoaded = true);
+    debouncedHandlePopState();
+  });
+
+  setContext('__svero__', {
+    routeInfo,
+    assignRoute,
+    unassignRoute,
+  });
+
+	const writable_props = ['path', 'nofallback'];
+	Object.keys($$props).forEach(key => {
+		if (!writable_props.includes(key) && !key.startsWith('$$')) console.warn(`<Router> was created with unknown prop '${key}'`);
+	});
+
+	let { $$slots = {}, $$scope } = $$props;
+
+	$$self.$set = $$props => {
+		if ('path' in $$props) $$invalidate('path', path = $$props.path);
+		if ('nofallback' in $$props) $$invalidate('nofallback', nofallback = $$props.nofallback);
+		if ('$$scope' in $$props) $$invalidate('$$scope', $$scope = $$props.$$scope);
+	};
+
+	return {
+		failure,
+		ctxLoaded,
+		path,
+		nofallback,
+		routeInfo,
+		handlePopState,
+		$$slots,
+		$$scope
+	};
+}
+
+class Router_1 extends SvelteComponentDev {
+	constructor(options) {
+		super(options);
+		if (!document.getElementById("svelte-h7mijx-style")) add_css();
+		init(this, options, instance, create_fragment, safe_not_equal, ["path", "nofallback"]);
+	}
+
+	get path() {
+		throw new Error("<Router>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+	}
+
+	set path(value) {
+		throw new Error("<Router>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+	}
+
+	get nofallback() {
+		throw new Error("<Router>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+	}
+
+	set nofallback(value) {
+		throw new Error("<Router>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+	}
+}
+
+/* src/Route.svelte generated by Svelte v3.4.4 */
+
+const get_default_slot_changes = ({ router }) => ({ router: router });
+const get_default_slot_context = ({ router }) => ({ router: router });
+
+// (27:0) {#if router}
+function create_if_block$1(ctx) {
+	var current_block_type_index, if_block, if_block_anchor, current;
+
+	var if_block_creators = [
+		create_if_block_1$1,
+		create_else_block
+	];
+
+	var if_blocks = [];
+
+	function select_block_type(ctx) {
+		if (ctx.component) return 0;
+		return 1;
+	}
+
+	current_block_type_index = select_block_type(ctx);
+	if_block = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
+
+	return {
+		c: function create() {
+			if_block.c();
+			if_block_anchor = empty();
+		},
+
+		m: function mount(target, anchor) {
+			if_blocks[current_block_type_index].m(target, anchor);
+			insert(target, if_block_anchor, anchor);
+			current = true;
+		},
+
+		p: function update(changed, ctx) {
+			var previous_block_index = current_block_type_index;
+			current_block_type_index = select_block_type(ctx);
+			if (current_block_type_index === previous_block_index) {
+				if_blocks[current_block_type_index].p(changed, ctx);
+			} else {
+				group_outros();
+				on_outro(() => {
+					if_blocks[previous_block_index].d(1);
+					if_blocks[previous_block_index] = null;
+				});
+				if_block.o(1);
+				check_outros();
+
+				if_block = if_blocks[current_block_type_index];
+				if (!if_block) {
+					if_block = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
+					if_block.c();
+				}
+				if_block.i(1);
+				if_block.m(if_block_anchor.parentNode, if_block_anchor);
+			}
+		},
+
+		i: function intro(local) {
+			if (current) return;
+			if (if_block) if_block.i();
+			current = true;
+		},
+
+		o: function outro(local) {
+			if (if_block) if_block.o();
+			current = false;
+		},
+
+		d: function destroy(detaching) {
+			if_blocks[current_block_type_index].d(detaching);
+
+			if (detaching) {
+				detach(if_block_anchor);
+			}
+		}
+	};
+}
+
+// (30:2) {:else}
+function create_else_block(ctx) {
+	var current;
+
+	const default_slot_1 = ctx.$$slots.default;
+	const default_slot = create_slot(default_slot_1, ctx, get_default_slot_context);
+
+	return {
+		c: function create() {
+			if (default_slot) default_slot.c();
+		},
+
+		l: function claim(nodes) {
+			if (default_slot) default_slot.l(nodes);
+		},
+
+		m: function mount(target, anchor) {
+			if (default_slot) {
+				default_slot.m(target, anchor);
+			}
+
+			current = true;
+		},
+
+		p: function update(changed, ctx) {
+			if (default_slot && default_slot.p && (changed.$$scope || changed.router)) {
+				default_slot.p(get_slot_changes(default_slot_1, ctx, changed, get_default_slot_changes), get_slot_context(default_slot_1, ctx, get_default_slot_context));
+			}
+		},
+
+		i: function intro(local) {
+			if (current) return;
+			if (default_slot && default_slot.i) default_slot.i(local);
+			current = true;
+		},
+
+		o: function outro(local) {
+			if (default_slot && default_slot.o) default_slot.o(local);
+			current = false;
+		},
+
+		d: function destroy(detaching) {
+			if (default_slot) default_slot.d(detaching);
+		}
+	};
+}
+
+// (28:2) {#if component}
+function create_if_block_1$1(ctx) {
+	var switch_instance_anchor, current;
+
+	var switch_value = ctx.component;
+
+	function switch_props(ctx) {
+		return {
+			props: { router: ctx.router },
+			$$inline: true
+		};
+	}
+
+	if (switch_value) {
+		var switch_instance = new switch_value(switch_props(ctx));
+	}
+
+	return {
+		c: function create() {
+			if (switch_instance) switch_instance.$$.fragment.c();
+			switch_instance_anchor = empty();
+		},
+
+		m: function mount(target, anchor) {
+			if (switch_instance) {
+				mount_component(switch_instance, target, anchor);
+			}
+
+			insert(target, switch_instance_anchor, anchor);
+			current = true;
+		},
+
+		p: function update(changed, ctx) {
+			var switch_instance_changes = {};
+			if (changed.router) switch_instance_changes.router = ctx.router;
+
+			if (switch_value !== (switch_value = ctx.component)) {
+				if (switch_instance) {
+					group_outros();
+					const old_component = switch_instance;
+					on_outro(() => {
+						old_component.$destroy();
+					});
+					old_component.$$.fragment.o(1);
+					check_outros();
+				}
+
+				if (switch_value) {
+					switch_instance = new switch_value(switch_props(ctx));
+
+					switch_instance.$$.fragment.c();
+					switch_instance.$$.fragment.i(1);
+					mount_component(switch_instance, switch_instance_anchor.parentNode, switch_instance_anchor);
+				} else {
+					switch_instance = null;
+				}
+			}
+
+			else if (switch_value) {
+				switch_instance.$set(switch_instance_changes);
+			}
+		},
+
+		i: function intro(local) {
+			if (current) return;
+			if (switch_instance) switch_instance.$$.fragment.i(local);
+
+			current = true;
+		},
+
+		o: function outro(local) {
+			if (switch_instance) switch_instance.$$.fragment.o(local);
+			current = false;
+		},
+
+		d: function destroy(detaching) {
+			if (detaching) {
+				detach(switch_instance_anchor);
+			}
+
+			if (switch_instance) switch_instance.$destroy(detaching);
+		}
+	};
+}
+
+function create_fragment$1(ctx) {
+	var if_block_anchor, current;
+
+	var if_block = (ctx.router) && create_if_block$1(ctx);
+
+	return {
+		c: function create() {
+			if (if_block) if_block.c();
+			if_block_anchor = empty();
+		},
+
+		l: function claim(nodes) {
+			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+		},
+
+		m: function mount(target, anchor) {
+			if (if_block) if_block.m(target, anchor);
+			insert(target, if_block_anchor, anchor);
+			current = true;
+		},
+
+		p: function update(changed, ctx) {
+			if (ctx.router) {
+				if (if_block) {
+					if_block.p(changed, ctx);
+					if_block.i(1);
+				} else {
+					if_block = create_if_block$1(ctx);
+					if_block.c();
+					if_block.i(1);
+					if_block.m(if_block_anchor.parentNode, if_block_anchor);
+				}
+			} else if (if_block) {
+				group_outros();
+				on_outro(() => {
+					if_block.d(1);
+					if_block = null;
+				});
+
+				if_block.o(1);
+				check_outros();
+			}
+		},
+
+		i: function intro(local) {
+			if (current) return;
+			if (if_block) if_block.i();
+			current = true;
+		},
+
+		o: function outro(local) {
+			if (if_block) if_block.o();
+			current = false;
+		},
+
+		d: function destroy(detaching) {
+			if (if_block) if_block.d(detaching);
+
+			if (detaching) {
+				detach(if_block_anchor);
+			}
+		}
+	};
+}
+
+function instance$1($$self, $$props, $$invalidate) {
+	let $routeInfo;
+
+	const { assignRoute, unassignRoute, routeInfo } = getContext('__svero__'); validate_store(routeInfo, 'routeInfo'); subscribe($$self, routeInfo, $$value => { $routeInfo = $$value; $$invalidate('$routeInfo', $routeInfo); });
+
+  let { key = null, path = '', exact = undefined, fallback = undefined, component = undefined, condition = undefined, redirect = undefined } = $$props;
+
+  let fullpath;
+
+  onMount(() => {
+    [key, fullpath] = assignRoute(key, path, { condition, redirect, fallback, exact }); $$invalidate('key', key);  });
+
+  onDestroy(() => {
+    unassignRoute(fullpath);
+  });
+
+	const writable_props = ['key', 'path', 'exact', 'fallback', 'component', 'condition', 'redirect'];
+	Object.keys($$props).forEach(key => {
+		if (!writable_props.includes(key) && !key.startsWith('$$')) console.warn(`<Route> was created with unknown prop '${key}'`);
+	});
+
+	let { $$slots = {}, $$scope } = $$props;
+
+	$$self.$set = $$props => {
+		if ('key' in $$props) $$invalidate('key', key = $$props.key);
+		if ('path' in $$props) $$invalidate('path', path = $$props.path);
+		if ('exact' in $$props) $$invalidate('exact', exact = $$props.exact);
+		if ('fallback' in $$props) $$invalidate('fallback', fallback = $$props.fallback);
+		if ('component' in $$props) $$invalidate('component', component = $$props.component);
+		if ('condition' in $$props) $$invalidate('condition', condition = $$props.condition);
+		if ('redirect' in $$props) $$invalidate('redirect', redirect = $$props.redirect);
+		if ('$$scope' in $$props) $$invalidate('$$scope', $$scope = $$props.$$scope);
+	};
+
+	let router;
+
+	$$self.$$.update = ($$dirty = { $routeInfo: 1, key: 1 }) => {
+		if ($$dirty.$routeInfo || $$dirty.key) { $$invalidate('router', router = $routeInfo[key]); }
+	};
+
+	return {
+		routeInfo,
+		key,
+		path,
+		exact,
+		fallback,
+		component,
+		condition,
+		redirect,
+		router,
+		$$slots,
+		$$scope
+	};
+}
+
+class Route extends SvelteComponentDev {
+	constructor(options) {
+		super(options);
+		init(this, options, instance$1, create_fragment$1, safe_not_equal, ["key", "path", "exact", "fallback", "component", "condition", "redirect"]);
+	}
+
+	get key() {
+		throw new Error("<Route>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+	}
+
+	set key(value) {
+		throw new Error("<Route>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+	}
+
+	get path() {
+		throw new Error("<Route>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+	}
+
+	set path(value) {
+		throw new Error("<Route>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+	}
+
+	get exact() {
+		throw new Error("<Route>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+	}
+
+	set exact(value) {
+		throw new Error("<Route>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+	}
+
+	get fallback() {
+		throw new Error("<Route>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+	}
+
+	set fallback(value) {
+		throw new Error("<Route>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+	}
+
+	get component() {
+		throw new Error("<Route>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+	}
+
+	set component(value) {
+		throw new Error("<Route>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+	}
+
+	get condition() {
+		throw new Error("<Route>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+	}
+
+	set condition(value) {
+		throw new Error("<Route>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+	}
+
+	get redirect() {
+		throw new Error("<Route>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+	}
+
+	set redirect(value) {
+		throw new Error("<Route>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+	}
+}
+
+/* src/Link.svelte generated by Svelte v3.4.4 */
+
+const file$1 = "src/Link.svelte";
+
+function create_fragment$2(ctx) {
+	var a, current, dispose;
+
+	const default_slot_1 = ctx.$$slots.default;
+	const default_slot = create_slot(default_slot_1, ctx, null);
+
+	return {
+		c: function create() {
+			a = element("a");
+
+			if (default_slot) default_slot.c();
+
+			a.href = ctx.href;
+			a.className = ctx.className;
+			add_location(a, file$1, 30, 0, 659);
+			dispose = listen(a, "click", prevent_default(ctx.onClick));
+		},
+
+		l: function claim(nodes) {
+			if (default_slot) default_slot.l(a_nodes);
+			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+		},
+
+		m: function mount(target, anchor) {
+			insert(target, a, anchor);
+
+			if (default_slot) {
+				default_slot.m(a, null);
+			}
+
+			current = true;
+		},
+
+		p: function update(changed, ctx) {
+			if (default_slot && default_slot.p && changed.$$scope) {
+				default_slot.p(get_slot_changes(default_slot_1, ctx, changed, null), get_slot_context(default_slot_1, ctx, null));
+			}
+
+			if (!current || changed.href) {
+				a.href = ctx.href;
+			}
+
+			if (!current || changed.className) {
+				a.className = ctx.className;
+			}
+		},
+
+		i: function intro(local) {
+			if (current) return;
+			if (default_slot && default_slot.i) default_slot.i(local);
+			current = true;
+		},
+
+		o: function outro(local) {
+			if (default_slot && default_slot.o) default_slot.o(local);
+			current = false;
+		},
+
+		d: function destroy(detaching) {
+			if (detaching) {
+				detach(a);
+			}
+
+			if (default_slot) default_slot.d(detaching);
+			dispose();
+		}
+	};
+}
+
+function instance$2($$self, $$props, $$invalidate) {
+	
+
+  let { class: cssClass = '', href = '/', className = '' } = $$props;
+
+  onMount(() => {
+    $$invalidate('className', className = className || cssClass);
+  });
+
+  const dispatch = createEventDispatcher();
+
+  // this will enable `<Link on:click={...} />` calls
+  function onClick(e) {
+    let fixedHref = href;
+
+    // this will rebase anchors to avoid location changes
+    if (fixedHref.charAt() !== '/') {
+      fixedHref = window.location.pathname + fixedHref;
+    }
+
+    navigateTo(fixedHref);
+    dispatch('click', e);
+  }
+
+	const writable_props = ['class', 'href', 'className'];
+	Object.keys($$props).forEach(key => {
+		if (!writable_props.includes(key) && !key.startsWith('$$')) console.warn(`<Link> was created with unknown prop '${key}'`);
+	});
+
+	let { $$slots = {}, $$scope } = $$props;
+
+	$$self.$set = $$props => {
+		if ('class' in $$props) $$invalidate('cssClass', cssClass = $$props.class);
+		if ('href' in $$props) $$invalidate('href', href = $$props.href);
+		if ('className' in $$props) $$invalidate('className', className = $$props.className);
+		if ('$$scope' in $$props) $$invalidate('$$scope', $$scope = $$props.$$scope);
+	};
+
+	return {
+		cssClass,
+		href,
+		className,
+		onClick,
+		$$slots,
+		$$scope
+	};
+}
+
+class Link extends SvelteComponentDev {
+	constructor(options) {
+		super(options);
+		init(this, options, instance$2, create_fragment$2, safe_not_equal, ["class", "href", "className"]);
+	}
+
+	get class() {
+		throw new Error("<Link>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+	}
+
+	set class(value) {
+		throw new Error("<Link>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+	}
+
+	get href() {
+		throw new Error("<Link>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+	}
+
+	set href(value) {
+		throw new Error("<Link>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+	}
+
+	get className() {
+		throw new Error("<Link>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+	}
+
+	set className(value) {
+		throw new Error("<Link>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+	}
+}
+
+export { Link, Route, Router_1 as Router, navigateTo };

@@ -1,0 +1,3 @@
+ISSUES
+- hash changes are not firing routing
+- components inside routes cannot use svelte-window?

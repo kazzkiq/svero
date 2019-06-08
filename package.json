@@ -21,7 +21,7 @@
     "rollup-plugin-node-resolve": "^5.0.1",
     "rollup-plugin-svelte": "^5.0.3",
     "rollup-plugin-terser": "^5.0.0",
-    "svelte": "^3.2.2"
+    "svelte": "^3.4.4"
   },
   "scripts": {
     "test": "kill-port 5001 && npm run test:server & npm run build && npm run test:build && npm run test:run",

@@ -1,5 +1,5 @@
 <script>
-  import { Link, navigateTo } from '../build/svero.min';
+  import { Link, navigateTo } from '../src/main';
 
   export let router = {};
 </script>

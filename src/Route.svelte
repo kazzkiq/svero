@@ -11,12 +11,33 @@
   export let condition = undefined;
   export let redirect = undefined;
 
+  let ctx;
+  let ctxLoaded;
   let fullpath;
+  let current;
 
   $: router = $routeInfo[key];
 
+  $: if (!router && component) {
+    if (current && current.$destroy) {
+      current.$destroy();
+      current = null;
+    }
+  }
+
+  $: if (ctx && router && component) {
+    current = new component({
+      target: ctx,
+      props: {
+        router,
+      },
+    });
+  }
+
   onMount(() => {
     [key, fullpath] = assignRoute(key, path, { condition, redirect, fallback, exact });
+    ctx = document.querySelector('[data-svero="ctx"]').parentElement;
+    ctxLoaded = true;
   });
 
   onDestroy(() => {
@@ -24,10 +45,16 @@
   });
 </script>
 
-{#if router}
-  {#if component}
-    <svelte:component this={component} {router} />
-  {:else}
-    <slot {router} />
-  {/if}
+<style>
+  .ctx {
+    display: none;
+  }
+</style>
+
+{#if !ctxLoaded}
+  <div class="ctx" data-svero="ctx"></div>
+{/if}
+
+{#if router && !component}
+  <slot {router} />
 {/if}

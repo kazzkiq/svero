@@ -10,10 +10,8 @@
   import { onMount, getContext, setContext } from 'svelte';
 
   let t;
-  let ctx;
   let failure;
   let fallback;
-  let ctxLoaded = false;
 
   export let path = '/';
   export let nofallback = null;
@@ -140,8 +138,6 @@
   }
 
   onMount(() => {
-    ctx = document.querySelector('[data-svero="ctx"]').parentElement;
-    ctxLoaded = true;
     debouncedHandlePopState();
   });
 
@@ -152,17 +148,7 @@
   });
 </script>
 
-<style>
-  .ctx {
-    display: none;
-  }
-</style>
-
 <svelte:window on:popstate={handlePopState}></svelte:window>
-
-{#if !ctxLoaded}
-  <div class="ctx" data-svero="ctx"></div>
-{/if}
 
 {#if failure && !nofallback}
   <fieldset>

@@ -5,6 +5,7 @@
 
   export let key = null;
   export let path = '';
+  export let props = null;
   export let exact = undefined;
   export let fallback = undefined;
   export let component = undefined;
@@ -26,9 +27,18 @@
   }
 
   $: if (ctx && router && component) {
+    const { props: _props, ..._obj } = $$props;
+
+    // prune all declared props from this component
+    arguments[0]['$$'].props.forEach(k => {
+      delete _obj[k];
+    });
+
     current = new component({
       target: ctx,
       props: {
+        ..._props,
+        ..._obj,
         router,
       },
     });

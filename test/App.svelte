@@ -10,7 +10,7 @@
     <Route fallback path="*"><h1>Not found</h1></Route>
     <Route exact path="/" component={Index} />
     <Route path="/company" redirect="/about" />
-    <Route path="/about" component={About} />
+    <Route path="/about" description="Company and such." component={About} />
     <Route path="/user/:name/:age" component={User} />
     <Route path="/admin-false" condition={false} component={User} redirect="/" />
     <Route path="/admin-true" condition={true} component={User} redirect="/" />

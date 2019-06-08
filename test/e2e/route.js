@@ -91,4 +91,11 @@ module.exports = {
       .assert.containsText('p', 'Anchored. whatever')
       .end();
   },
+  '<Route> can receive additional props': (browser) => {
+    browser
+      .url('http://localhost:5001/about')
+      .waitForElementVisible('p')
+      .assert.containsText('p', 'Company and such.')
+      .end();
+  },
 };

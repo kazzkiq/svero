@@ -35,7 +35,7 @@
   <Route>
     <fieldset>
       <legend>Routing:</legend>
-      <Router nofallback path="/sub/:bar">
+      <Router nofallback path="/:bar">
         <Route let:router>{router.params.bar}!</Route>
       </Router>
       <Route path="/foo">Foo</Route>
@@ -45,7 +45,7 @@
           <details>{router.failure}</details>
         </summary>
       </Route>
-      <Router nofallback path="/sub/nested">
+      <Router nofallback path="/nested">
         <Route>
           [...]
           <Route fallback path="*">not found?</Route>

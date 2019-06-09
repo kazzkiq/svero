@@ -656,7 +656,7 @@ function writable(value, start = noop) {
 
 const file = "src/Router.svelte";
 
-// (153:0) {#if failure && !nofallback}
+// (159:0) {#if failure && !nofallback}
 function create_if_block(ctx) {
 	var fieldset, legend, t0, t1, t2, pre, t3;
 
@@ -669,9 +669,9 @@ function create_if_block(ctx) {
 			t2 = space();
 			pre = element("pre");
 			t3 = text(ctx.failure);
-			add_location(legend, file, 154, 4, 3340);
-			add_location(pre, file, 155, 4, 3384);
-			add_location(fieldset, file, 153, 2, 3325);
+			add_location(legend, file, 160, 4, 3584);
+			add_location(pre, file, 161, 4, 3628);
+			add_location(fieldset, file, 159, 2, 3569);
 		},
 
 		m: function mount(target, anchor) {
@@ -794,7 +794,7 @@ function fixPath(route) {
 }
 
 function instance($$self, $$props, $$invalidate) {
-	let $routeInfo;
+	let $routeInfo, $basePath;
 
 	
 
@@ -805,6 +805,8 @@ function instance($$self, $$props, $$invalidate) {
   let { path = '/', nofallback = null } = $$props;
 
   const routeInfo = writable({}); validate_store(routeInfo, 'routeInfo'); subscribe($$self, routeInfo, $$value => { $routeInfo = $$value; $$invalidate('$routeInfo', $routeInfo); });
+  const routerContext  = getContext('__svero__');
+  const basePath = routerContext ? routerContext.basePath : writable(path); validate_store(basePath, 'basePath'); subscribe($$self, basePath, $$value => { $basePath = $$value; $$invalidate('$basePath', $basePath); });
 
   function handleRoutes(map) {
     const params = map.reduce((prev, cur) => {
@@ -893,11 +895,15 @@ function instance($$self, $$props, $$invalidate) {
   function assignRoute(key, route, routeInfo) {
     key = key || Math.random().toString(36).substr(2);
 
+    const fixedRoot = $basePath !== path && $basePath !== '/'
+      ? `${$basePath}${path}`
+      : path;
+
     const handler = { key, ...routeInfo };
 
     let fullpath;
 
-    router.mount(path, () => {
+    router.mount(fixedRoot, () => {
       fullpath = router.add(fixPath(route), handler);
       fallback = (handler.fallback && key) || fallback;
     });
@@ -908,18 +914,18 @@ function instance($$self, $$props, $$invalidate) {
   }
 
   function unassignRoute(route) {
-    router.mount(path, () => {
-      router.rm(fixPath(route));
-    });
-
+    router.rm(fixPath(route));
     debouncedHandlePopState();
   }
 
-  onMount(() => {
-    debouncedHandlePopState();
-  });
+  if (!routerContext) {
+    onMount(() => {
+      debouncedHandlePopState();
+    });
+  }
 
   setContext('__svero__', {
+    basePath,
     routeInfo,
     assignRoute,
     unassignRoute,
@@ -943,6 +949,7 @@ function instance($$self, $$props, $$invalidate) {
 		path,
 		nofallback,
 		routeInfo,
+		basePath,
 		handlePopState,
 		$$slots,
 		$$scope

@@ -17,6 +17,8 @@
   export let nofallback = null;
 
   const routeInfo = writable({});
+  const routerContext  = getContext('__svero__');
+  const basePath = routerContext ? routerContext.basePath : writable(path);
 
   function cleanPath(route) {
     return route.replace(/\?[^#]*/, '').replace(/(?!^)\/#/, '#').replace('/#', '#').replace(/\/$/, '');
@@ -115,11 +117,15 @@
   function assignRoute(key, route, routeInfo) {
     key = key || Math.random().toString(36).substr(2);
 
+    const fixedRoot = $basePath !== path && $basePath !== '/'
+      ? `${$basePath}${path}`
+      : path;
+
     const handler = { key, ...routeInfo };
 
     let fullpath;
 
-    router.mount(path, () => {
+    router.mount(fixedRoot, () => {
       fullpath = router.add(fixPath(route), handler);
       fallback = (handler.fallback && key) || fallback;
     });
@@ -130,18 +136,18 @@
   }
 
   function unassignRoute(route) {
-    router.mount(path, () => {
-      router.rm(fixPath(route));
-    });
-
+    router.rm(fixPath(route));
     debouncedHandlePopState();
   }
 
-  onMount(() => {
-    debouncedHandlePopState();
-  });
+  if (!routerContext) {
+    onMount(() => {
+      debouncedHandlePopState();
+    });
+  }
 
   setContext('__svero__', {
+    basePath,
     routeInfo,
     assignRoute,
     unassignRoute,

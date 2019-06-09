@@ -17,32 +17,37 @@
   let fullpath;
   let current;
 
-  $: router = $routeInfo[key];
+  function add(info, exported) {
+    if (ctx && info && component) {
+      if (current && current.__proto__.constructor === component) return;
 
-  $: if (!router && component) {
-    if (current && current.$destroy) {
-      current.$destroy();
-      current = null;
+      const { props: _props, ..._others } = $$props;
+
+      // prune all declared props from this component
+      exported.forEach(k => {
+        delete _others[k];
+      });
+
+      current = new component({
+        target: ctx,
+        props: {
+          ..._props,
+          ..._others,
+          router: info,
+        },
+      });
+    }
+
+    if (!info && component) {
+      if (current && current.$destroy) {
+        current.$destroy();
+        current = null;
+      }
     }
   }
 
-  $: if (ctx && router && component) {
-    const { props: _props, ..._obj } = $$props;
-
-    // prune all declared props from this component
-    arguments[0]['$$'].props.forEach(k => {
-      delete _obj[k];
-    });
-
-    current = new component({
-      target: ctx,
-      props: {
-        ..._props,
-        ..._obj,
-        router,
-      },
-    });
-  }
+  $: router = $routeInfo[key];
+  $: add(router, arguments[0]['$$'].props);
 
   onMount(() => {
     [key, fullpath] = assignRoute(key, path, { condition, redirect, fallback, exact });

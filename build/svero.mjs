@@ -979,14 +979,14 @@ const file$1 = "src/Route.svelte";
 function add_css() {
 	var style = element("style");
 	style.id = 'svelte-h7mijx-style';
-	style.textContent = ".ctx.svelte-h7mijx{display:none}\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiUm91dGUuc3ZlbHRlIiwic291cmNlcyI6WyJSb3V0ZS5zdmVsdGUiXSwic291cmNlc0NvbnRlbnQiOlsiPHNjcmlwdD5cbiAgaW1wb3J0IHsgb25Nb3VudCwgb25EZXN0cm95LCBnZXRDb250ZXh0IH0gZnJvbSAnc3ZlbHRlJztcblxuICBjb25zdCB7IGFzc2lnblJvdXRlLCB1bmFzc2lnblJvdXRlLCByb3V0ZUluZm8gfSA9IGdldENvbnRleHQoJ19fc3Zlcm9fXycpO1xuXG4gIGV4cG9ydCBsZXQga2V5ID0gbnVsbDtcbiAgZXhwb3J0IGxldCBwYXRoID0gJyc7XG4gIGV4cG9ydCBsZXQgcHJvcHMgPSBudWxsO1xuICBleHBvcnQgbGV0IGV4YWN0ID0gdW5kZWZpbmVkO1xuICBleHBvcnQgbGV0IGZhbGxiYWNrID0gdW5kZWZpbmVkO1xuICBleHBvcnQgbGV0IGNvbXBvbmVudCA9IHVuZGVmaW5lZDtcbiAgZXhwb3J0IGxldCBjb25kaXRpb24gPSB1bmRlZmluZWQ7XG4gIGV4cG9ydCBsZXQgcmVkaXJlY3QgPSB1bmRlZmluZWQ7XG5cbiAgbGV0IGN0eDtcbiAgbGV0IGN0eExvYWRlZDtcbiAgbGV0IGZ1bGxwYXRoO1xuICBsZXQgY3VycmVudDtcblxuICAkOiByb3V0ZXIgPSAkcm91dGVJbmZvW2tleV07XG5cbiAgJDogaWYgKCFyb3V0ZXIgJiYgY29tcG9uZW50KSB7XG4gICAgaWYgKGN1cnJlbnQgJiYgY3VycmVudC4kZGVzdHJveSkge1xuICAgICAgY3VycmVudC4kZGVzdHJveSgpO1xuICAgICAgY3VycmVudCA9IG51bGw7XG4gICAgfVxuICB9XG5cbiAgJDogaWYgKGN0eCAmJiByb3V0ZXIgJiYgY29tcG9uZW50KSB7XG4gICAgY29uc3QgeyBwcm9wczogX3Byb3BzLCAuLi5fb2JqIH0gPSAkJHByb3BzO1xuXG4gICAgLy8gcHJ1bmUgYWxsIGRlY2xhcmVkIHByb3BzIGZyb20gdGhpcyBjb21wb25lbnRcbiAgICBhcmd1bWVudHNbMF1bJyQkJ10ucHJvcHMuZm9yRWFjaChrID0+IHtcbiAgICAgIGRlbGV0ZSBfb2JqW2tdO1xuICAgIH0pO1xuXG4gICAgY3VycmVudCA9IG5ldyBjb21wb25lbnQoe1xuICAgICAgdGFyZ2V0OiBjdHgsXG4gICAgICBwcm9wczoge1xuICAgICAgICAuLi5fcHJvcHMsXG4gICAgICAgIC4uLl9vYmosXG4gICAgICAgIHJvdXRlcixcbiAgICAgIH0sXG4gICAgfSk7XG4gIH1cblxuICBvbk1vdW50KCgpID0+IHtcbiAgICBba2V5LCBmdWxscGF0aF0gPSBhc3NpZ25Sb3V0ZShrZXksIHBhdGgsIHsgY29uZGl0aW9uLCByZWRpcmVjdCwgZmFsbGJhY2ssIGV4YWN0IH0pO1xuICAgIGN0eCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoJ1tkYXRhLXN2ZXJvPVwiY3R4XCJdJykucGFyZW50RWxlbWVudDtcbiAgICBjdHhMb2FkZWQgPSB0cnVlO1xuICB9KTtcblxuICBvbkRlc3Ryb3koKCkgPT4ge1xuICAgIHVuYXNzaWduUm91dGUoZnVsbHBhdGgpO1xuICB9KTtcbjwvc2NyaXB0PlxuXG48c3R5bGU+XG4gIC5jdHgge1xuICAgIGRpc3BsYXk6IG5vbmU7XG4gIH1cbjwvc3R5bGU+XG5cbnsjaWYgIWN0eExvYWRlZH1cbiAgPGRpdiBjbGFzcz1cImN0eFwiIGRhdGEtc3Zlcm89XCJjdHhcIj48L2Rpdj5cbnsvaWZ9XG5cbnsjaWYgcm91dGVyICYmICFjb21wb25lbnR9XG4gIDxzbG90IHtyb3V0ZXJ9IC8+XG57L2lmfVxuIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQTBERSxJQUFJLGNBQUMsQ0FBQyxBQUNKLE9BQU8sQ0FBRSxJQUFJLEFBQ2YsQ0FBQyJ9 */";
+	style.textContent = ".ctx.svelte-h7mijx{display:none}\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiUm91dGUuc3ZlbHRlIiwic291cmNlcyI6WyJSb3V0ZS5zdmVsdGUiXSwic291cmNlc0NvbnRlbnQiOlsiPHNjcmlwdD5cbiAgaW1wb3J0IHsgb25Nb3VudCwgb25EZXN0cm95LCBnZXRDb250ZXh0IH0gZnJvbSAnc3ZlbHRlJztcblxuICBjb25zdCB7IGFzc2lnblJvdXRlLCB1bmFzc2lnblJvdXRlLCByb3V0ZUluZm8gfSA9IGdldENvbnRleHQoJ19fc3Zlcm9fXycpO1xuXG4gIGV4cG9ydCBsZXQga2V5ID0gbnVsbDtcbiAgZXhwb3J0IGxldCBwYXRoID0gJyc7XG4gIGV4cG9ydCBsZXQgcHJvcHMgPSBudWxsO1xuICBleHBvcnQgbGV0IGV4YWN0ID0gdW5kZWZpbmVkO1xuICBleHBvcnQgbGV0IGZhbGxiYWNrID0gdW5kZWZpbmVkO1xuICBleHBvcnQgbGV0IGNvbXBvbmVudCA9IHVuZGVmaW5lZDtcbiAgZXhwb3J0IGxldCBjb25kaXRpb24gPSB1bmRlZmluZWQ7XG4gIGV4cG9ydCBsZXQgcmVkaXJlY3QgPSB1bmRlZmluZWQ7XG5cbiAgbGV0IGN0eDtcbiAgbGV0IGN0eExvYWRlZDtcbiAgbGV0IGZ1bGxwYXRoO1xuICBsZXQgY3VycmVudDtcblxuICBmdW5jdGlvbiBhZGQoaW5mbywgZXhwb3J0ZWQpIHtcbiAgICBpZiAoY3R4ICYmIGluZm8gJiYgY29tcG9uZW50KSB7XG4gICAgICBpZiAoY3VycmVudCAmJiBjdXJyZW50Ll9fcHJvdG9fXy5jb25zdHJ1Y3RvciA9PT0gY29tcG9uZW50KSByZXR1cm47XG5cbiAgICAgIGNvbnN0IHsgcHJvcHM6IF9wcm9wcywgLi4uX290aGVycyB9ID0gJCRwcm9wcztcblxuICAgICAgLy8gcHJ1bmUgYWxsIGRlY2xhcmVkIHByb3BzIGZyb20gdGhpcyBjb21wb25lbnRcbiAgICAgIGV4cG9ydGVkLmZvckVhY2goayA9PiB7XG4gICAgICAgIGRlbGV0ZSBfb3RoZXJzW2tdO1xuICAgICAgfSk7XG5cbiAgICAgIGN1cnJlbnQgPSBuZXcgY29tcG9uZW50KHtcbiAgICAgICAgdGFyZ2V0OiBjdHgsXG4gICAgICAgIHByb3BzOiB7XG4gICAgICAgICAgLi4uX3Byb3BzLFxuICAgICAgICAgIC4uLl9vdGhlcnMsXG4gICAgICAgICAgcm91dGVyOiBpbmZvLFxuICAgICAgICB9LFxuICAgICAgfSk7XG4gICAgfVxuXG4gICAgaWYgKCFpbmZvICYmIGNvbXBvbmVudCkge1xuICAgICAgaWYgKGN1cnJlbnQgJiYgY3VycmVudC4kZGVzdHJveSkge1xuICAgICAgICBjdXJyZW50LiRkZXN0cm95KCk7XG4gICAgICAgIGN1cnJlbnQgPSBudWxsO1xuICAgICAgfVxuICAgIH1cbiAgfVxuXG4gICQ6IHJvdXRlciA9ICRyb3V0ZUluZm9ba2V5XTtcbiAgJDogYWRkKHJvdXRlciwgYXJndW1lbnRzWzBdWyckJCddLnByb3BzKTtcblxuICBvbk1vdW50KCgpID0+IHtcbiAgICBba2V5LCBmdWxscGF0aF0gPSBhc3NpZ25Sb3V0ZShrZXksIHBhdGgsIHsgY29uZGl0aW9uLCByZWRpcmVjdCwgZmFsbGJhY2ssIGV4YWN0IH0pO1xuICAgIGN0eCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoJ1tkYXRhLXN2ZXJvPVwiY3R4XCJdJykucGFyZW50RWxlbWVudDtcbiAgICBjdHhMb2FkZWQgPSB0cnVlO1xuICB9KTtcblxuICBvbkRlc3Ryb3koKCkgPT4ge1xuICAgIHVuYXNzaWduUm91dGUoZnVsbHBhdGgpO1xuICB9KTtcbjwvc2NyaXB0PlxuXG48c3R5bGU+XG4gIC5jdHgge1xuICAgIGRpc3BsYXk6IG5vbmU7XG4gIH1cbjwvc3R5bGU+XG5cbnsjaWYgIWN0eExvYWRlZH1cbiAgPGRpdiBjbGFzcz1cImN0eFwiIGRhdGEtc3Zlcm89XCJjdHhcIj48L2Rpdj5cbnsvaWZ9XG5cbnsjaWYgcm91dGVyICYmICFjb21wb25lbnR9XG4gIDxzbG90IHtyb3V0ZXJ9IC8+XG57L2lmfVxuIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQStERSxJQUFJLGNBQUMsQ0FBQyxBQUNKLE9BQU8sQ0FBRSxJQUFJLEFBQ2YsQ0FBQyJ9 */";
 	append(document.head, style);
 }
 
 const get_default_slot_changes = ({ router }) => ({ router: router });
 const get_default_slot_context = ({ router }) => ({ router: router });
 
-// (64:0) {#if !ctxLoaded}
+// (69:0) {#if !ctxLoaded}
 function create_if_block_1(ctx) {
 	var div;
 
@@ -995,7 +995,7 @@ function create_if_block_1(ctx) {
 			div = element("div");
 			div.className = "ctx svelte-h7mijx";
 			div.dataset.svero = "ctx";
-			add_location(div, file$1, 64, 2, 1314);
+			add_location(div, file$1, 69, 2, 1501);
 		},
 
 		m: function mount(target, anchor) {
@@ -1010,7 +1010,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (68:0) {#if router && !component}
+// (73:0) {#if router && !component}
 function create_if_block$1(ctx) {
 	var current_1;
 
@@ -1157,8 +1157,37 @@ function instance$1($$self, $$props, $$invalidate) {
   let fullpath;
   let current;
 
+  function add(info, exported) {
+    if (ctx && info && component) {
+      if (current && current.__proto__.constructor === component) return;
+
+      const { props: _props, ..._others } = $$props;
+
+      // prune all declared props from this component
+      exported.forEach(k => {
+        delete _others[k];
+      });
+
+      current = new component({
+        target: ctx,
+        props: {
+          ..._props,
+          ..._others,
+          router: info,
+        },
+      });
+    }
+
+    if (!info && component) {
+      if (current && current.$destroy) {
+        current.$destroy();
+        current = null;
+      }
+    }
+  }
+
   onMount(() => {
-    [key, fullpath] = assignRoute(key, path, { condition, redirect, fallback, exact }); $$invalidate('key', key);    $$invalidate('ctx', ctx = document.querySelector('[data-svero="ctx"]').parentElement);
+    [key, fullpath] = assignRoute(key, path, { condition, redirect, fallback, exact }); $$invalidate('key', key);    ctx = document.querySelector('[data-svero="ctx"]').parentElement;
     $$invalidate('ctxLoaded', ctxLoaded = true);
   });
 
@@ -1183,31 +1212,9 @@ function instance$1($$self, $$props, $$invalidate) {
 
 	let router;
 
-	$$self.$$.update = ($$dirty = { $routeInfo: 1, key: 1, router: 1, component: 1, current: 1, ctx: 1, $$props: 1 }) => {
+	$$self.$$.update = ($$dirty = { $routeInfo: 1, key: 1, router: 1 }) => {
 		if ($$dirty.$routeInfo || $$dirty.key) { $$invalidate('router', router = $routeInfo[key]); }
-		if ($$dirty.router || $$dirty.component || $$dirty.current) { if (!router && component) {
-        if (current && current.$destroy) {
-          current.$destroy();
-          $$invalidate('current', current = null);
-        }
-      } }
-		if ($$dirty.ctx || $$dirty.router || $$dirty.component) { if (ctx && router && component) {
-        const { props: _props, ..._obj } = $$props;
-    
-        // prune all declared props from this component
-        arguments[0]['$$'].props.forEach(k => {
-          delete _obj[k];
-        });
-    
-        $$invalidate('current', current = new component({
-          target: ctx,
-          props: {
-            ..._props,
-            ..._obj,
-            router,
-          },
-        }));
-      } }
+		if ($$dirty.router) { add(router, arguments[0]['$$'].props); }
 	};
 
 	return {

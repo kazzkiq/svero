@@ -1,2 +1,2 @@
-package-lock.json binary
-build/*.* binary
+package-lock.json -diff
+build/* -diff

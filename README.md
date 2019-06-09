@@ -74,6 +74,20 @@ A component loaded by `<Route>` receives a property with route details:
 </script>
 ```
 
+Additional properties are passed to the mounted component, e.g.
+
+```html
+<Route component={Test} title="Some description" />
+```
+
+Also, you can pass an object:
+
+```html
+<Route component={Test} props={myProps} />
+```
+
+> `Route` props are omitted, but all remaining ones are passed to `Test`.
+
 Routes can also render any given markup when they're active, e.g.
 
 ```html

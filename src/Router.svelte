@@ -97,7 +97,19 @@
       const found = resolveRoutes(fullpath);
 
       if (fullpath.includes('#')) {
-        handleRoutes(found.concat(router.find(fullpath)));
+        const next = router.find(fullpath);
+        const keys = {};
+
+        // override previous routes to avoid non-exact matches
+        handleRoutes(found.concat(next).reduce((prev, cur) => {
+          if (typeof keys[cur.key] === 'undefined') {
+            keys[cur.key] = prev.length;
+          }
+
+          prev[keys[cur.key]] = cur;
+
+          return prev;
+        }, []));
       }
     } catch (e) {
       if (!fallback) {

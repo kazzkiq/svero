@@ -2,8 +2,8 @@
   "name": "svero",
   "version": "0.5.0",
   "description": "Simple Router for Svelte 3",
-  "main": "src/main.js",
   "svelte": "src/main.js",
+  "main": "src/main.js",
   "files": [
     "src/*",
     "README.md",
@@ -30,7 +30,7 @@
     "test": "kill-port 5001 && npm run test:server & npm run test:build && npm run test:run",
     "debug": "kill-port 5001 && npm run test:build && npm run test:server",
     "test:server": "http-server test/public -s -p 5001",
-    "test:build": "rollup -c rollup.config.test.js",
+    "test:build": "NODE_ENV=test rollup -c",
     "test:run": "nightwatch",
     "prepublishOnly": "npm test"
   },

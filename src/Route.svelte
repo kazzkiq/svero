@@ -10,7 +10,6 @@
   export let component = undefined;
   export let condition = undefined;
   export let redirect = undefined;
-  export let nomount = undefined
 
   const { assignRoute, unassignRoute, routeInfo } = getContext(CTX_ROUTER);
 
@@ -39,11 +38,9 @@
     activeProps = getProps($$props, arguments[0]['$$'].props);
   }
 
-  if (typeof window !== 'undefined') {
-    onDestroy(() => {
-      unassignRoute(fullpath);
-    });
-  }
+  onDestroy(() => {
+    unassignRoute(fullpath);
+  });
 </script>
 
 {#if activeRouter}

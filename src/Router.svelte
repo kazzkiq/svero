@@ -1,6 +1,6 @@
 <script context="module">
   import Router from 'abstract-nested-router';
-  import { navigateTo } from './utils';
+  import { CTX_ROUTER, navigateTo } from './utils';
 
   const router = new Router();
 </script>
@@ -17,7 +17,7 @@
   export let nofallback = null;
 
   const routeInfo = writable({});
-  const routerContext  = getContext('__svero__');
+  const routerContext = getContext(CTX_ROUTER);
   const basePath = routerContext ? routerContext.basePath : writable(path);
 
   function cleanPath(route) {
@@ -64,7 +64,7 @@
   }
 
   function doFallback(e, path) {
-    $routeInfo[fallback] = { failure: e, params: { _: path.substr(1) } };
+    $routeInfo[fallback] = { failure: e, params: { _: path.substr(1) || undefined } };
   }
 
   function resolveRoutes(path) {
@@ -109,7 +109,7 @@
     }
   }
 
-  function debouncedHandlePopState() {
+  function _handlePopState() {
     clearTimeout(t);
     t = setTimeout(handlePopState, 100);
   }
@@ -130,23 +130,17 @@
       fallback = (handler.fallback && key) || fallback;
     });
 
-    debouncedHandlePopState();
+    _handlePopState();
 
     return [key, fullpath];
   }
 
   function unassignRoute(route) {
     router.rm(fixPath(route));
-    debouncedHandlePopState();
+    _handlePopState();
   }
 
-  if (!routerContext) {
-    onMount(() => {
-      debouncedHandlePopState();
-    });
-  }
-
-  setContext('__svero__', {
+  setContext(CTX_ROUTER, {
     basePath,
     routeInfo,
     assignRoute,

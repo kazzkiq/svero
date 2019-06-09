@@ -1,7 +1,6 @@
 <script>
-  import { onMount, onDestroy, getContext } from 'svelte';
-
-  const { assignRoute, unassignRoute, routeInfo } = getContext('__svero__');
+  import { onDestroy, getContext } from 'svelte';
+  import { CTX_ROUTER } from './utils';
 
   export let key = null;
   export let path = '';
@@ -11,65 +10,46 @@
   export let component = undefined;
   export let condition = undefined;
   export let redirect = undefined;
+  export let nomount = undefined
 
-  let ctx;
-  let ctxLoaded;
+  const { assignRoute, unassignRoute, routeInfo } = getContext(CTX_ROUTER);
+
+  let activeRouter = null;
+  let activeProps = {};
   let fullpath;
-  let current;
 
-  function add(info, exported) {
-    if (ctx && info && component) {
-      if (current && current.__proto__.constructor === component) return;
+  function getProps(given, required) {
+    const { props, ...others } = given;
 
-      const { props: _props, ..._others } = $$props;
+    // prune all declared props from this component
+    required.forEach(k => {
+      delete others[k];
+    });
 
-      // prune all declared props from this component
-      exported.forEach(k => {
-        delete _others[k];
-      });
-
-      current = new component({
-        target: ctx,
-        props: {
-          ..._props,
-          ..._others,
-          router: info,
-        },
-      });
-    }
-
-    if (!info && component) {
-      if (current && current.$destroy) {
-        current.$destroy();
-        current = null;
-      }
-    }
+    return {
+      ...props,
+      ...others,
+    };
   }
 
-  $: router = $routeInfo[key];
-  $: add(router, arguments[0]['$$'].props);
+  [key, fullpath] = assignRoute(key, path, { condition, redirect, fallback, exact });
 
-  onMount(() => {
-    [key, fullpath] = assignRoute(key, path, { condition, redirect, fallback, exact });
-    ctx = document.querySelector('[data-svero="ctx"]').parentElement;
-    ctxLoaded = true;
-  });
+  $: {
+    activeRouter = $routeInfo[key];
+    activeProps = getProps($$props, arguments[0]['$$'].props);
+  }
 
-  onDestroy(() => {
-    unassignRoute(fullpath);
-  });
+  if (typeof window !== 'undefined') {
+    onDestroy(() => {
+      unassignRoute(fullpath);
+    });
+  }
 </script>
 
-<style>
-  .ctx {
-    display: none;
-  }
-</style>
-
-{#if !ctxLoaded}
-  <div class="ctx" data-svero="ctx"></div>
-{/if}
-
-{#if router && !component}
-  <slot {router} />
+{#if activeRouter}
+  {#if component}
+    <svelte:component this={component} router={activeRouter} {...activeProps} />
+  {:else}
+    <slot router={activeRouter} props={activeProps} />
+  {/if}
 {/if}

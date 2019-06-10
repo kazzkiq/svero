@@ -2,12 +2,13 @@
   "name": "svero",
   "version": "0.5.0",
   "description": "Simple Router for Svelte 3",
+  "main": "dist/svero.js",
   "svelte": "src/main.js",
-  "main": "src/main.js",
+  "module": "dist/svero.es.js",
+  "browser": "dist/svero.min.js",
   "files": [
-    "src/*",
-    "README.md",
-    "LICENSE"
+    "src/**",
+    "dist/*"
   ],
   "peerDependencies": {
     "svelte": "3.x"
@@ -21,6 +22,7 @@
     "rollup-plugin-commonjs": "^10.0.0",
     "rollup-plugin-node-resolve": "^5.0.1",
     "rollup-plugin-svelte": "^5.0.3",
+    "rollup-plugin-terser": "^5.0.0",
     "svelte": "^3.4.4"
   },
   "dependencies": {
@@ -32,7 +34,8 @@
     "test:server": "http-server test/public -s -p 5001",
     "test:build": "NODE_ENV=test rollup -c",
     "test:run": "nightwatch",
-    "prepublishOnly": "npm test"
+    "build": "NODE_ENV=production rollup -c",
+    "prepublishOnly": "npm run test && npm run build"
   },
   "repository": {
     "type": "git",

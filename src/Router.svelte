@@ -126,14 +126,14 @@
     t = setTimeout(handlePopState, 100);
   }
 
-  function assignRoute(key, route, routeInfo) {
+  function assignRoute(key, route, detail) {
     key = key || Math.random().toString(36).substr(2);
 
     const fixedRoot = $basePath !== path && $basePath !== '/'
       ? `${$basePath}${path}`
       : path;
 
-    const handler = { key, ...routeInfo };
+    const handler = { key, ...detail };
 
     let fullpath;
 

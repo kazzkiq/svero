@@ -37,29 +37,37 @@ The usage is super simple:
 
   import Index from './pages/Index.svelte';
   import About from './pages/About.svelte';
+  import Employees from './pages/Employees.svelte';
+
+  let employees = [{ id: 1, name: 'Bill'}, { id:2, name: 'Sven' }];
 </script>
 
 <Router>
   <Route path="*" component={Index} />
   <Route path="/about" component={About} />
   <Route path="/about/:who/123/:where" component={About} />
+  <Route path="/employees">
+    <Employees {employees}/>
+  </Route>
 </Router>
 ```
 
 The `*` wildcard simply works as a fallback. If a route fails to meet any other path, it then loads the path with the `*`. If there is no wildcard route and the route did not meet any other path, nothing is loaded.
+
+Your custom props can be passed by putting your component in the Route `slot` (Employees example above).
 
 Paths with parameters (`:param`) are passed to components via props: `router.params`.
 
 A component loaded by `<Route>` receives a property with route details:
 
 ```html
-<!-- ./pages/Index.svelte -->
+<!-- ./pages/About.svelte -->
 <script>
   export let router = {};
 
   // Those contains useful information about current route status
-  router.route;
-  router.params;
+  router.route; // Route Object
+  router.params; // /about/bill/123/kansas { who: 'bill', where: 'kansas' }
 </script>
 ```
 

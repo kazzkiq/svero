@@ -4,6 +4,7 @@
   let cssClass = '';
   export let href = '/';
   export let className = '';
+  export let title = '';
   export { cssClass as class };
 
   onMount(() => {
@@ -11,4 +12,4 @@
   });
 </script>
 
-<a href={href} class={className} on:click|preventDefault={() => navigateTo(href)}><slot></slot></a>
+<a href={href} class={className} title={title} on:click|preventDefault={() => navigateTo(href)}><slot></slot></a>

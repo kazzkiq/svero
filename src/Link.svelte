@@ -1,6 +1,8 @@
 <script>
   import { onMount } from 'svelte';
   import { navigateTo } from './utils';
+  import { createEventDispatcher } from 'svelte';
+  const dispatch = createEventDispatcher();
   let cssClass = '';
   export let href = '/';
   export let className = '';
@@ -10,6 +12,11 @@
   onMount(() => {
     className = className || cssClass;
   });
+  
+  function onClick() {
+      dispatch('click');
+      navigateTo(href);
+  }
 </script>
 
-<a href={href} class={className} title={title} on:click|preventDefault={() => navigateTo(href)}><slot></slot></a>
+<a href={href} class={className} on:click|preventDefault={onClick}><slot></slot></a>

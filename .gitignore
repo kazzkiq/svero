@@ -1,9 +1,9 @@
 .DS_Store
 node_modules
-package-lock.json
 yarn.lock
 chromedriver.log
 *.xml
+dist
 tests_output
 test/public/test.js
 test/public/test.js.map

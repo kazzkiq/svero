@@ -9,7 +9,7 @@ module.exports = {
       // Checking if non-existent route redirects to About Page
       .url('http://localhost:5001/does-not-exists')
       .waitForElementVisible('h1')
-      .assert.containsText('h1', 'Hello from About!')
+      .assert.containsText('h1', 'Not found')
       .end();
   },
   '<Route> Slot rendering (/slot) Tests': (browser) => {
@@ -62,6 +62,40 @@ module.exports = {
       .waitForElementVisible('h2')
       .assert.containsText('h2', 'Admin Panel')
       .assert.urlContains('/admin-true')
+      .end();
+  },
+  '<Route> should work with hash-based routes': (browser) => {
+    browser
+      .url('http://localhost:5001/nested#')
+      .waitForElementVisible('p')
+      .assert.containsText('p', 'No hash is present')
+      .click('a[href="#abc/def/ghi"]')
+      .assert.containsText('p', 'Params: {"any":"abc","path":"def/ghi"}')
+      .click('a[href="#test"]')
+      .assert.containsText('p', 'Static placeholder is shown')
+      .end();
+  },
+  '<Route> use fallback for unreachable nested-routes': (browser) => {
+    browser
+      .url('http://localhost:5001/nested/im_not_exists')
+      .waitForElementVisible('h1')
+      .assert.containsText('h1', 'Not found')
+      .end();
+  },
+  '<Route> hash-based paths can all catch-all': (browser) => {
+    browser
+      .url('http://localhost:5001/#whatever')
+      .waitForElementVisible('h1')
+      .assert.containsText('h1', 'Hello from Index!')
+      .waitForElementVisible('p')
+      .assert.containsText('p', 'Anchored. whatever')
+      .end();
+  },
+  '<Route> can receive additional props': (browser) => {
+    browser
+      .url('http://localhost:5001/about')
+      .waitForElementVisible('p')
+      .assert.containsText('p', 'Company and such.')
       .end();
   },
 };

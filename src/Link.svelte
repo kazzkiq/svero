@@ -1,9 +1,9 @@
 <script>
-  import { onMount } from 'svelte';
+  import { onMount, createEventDispatcher } from 'svelte';
   import { navigateTo } from './utils';
-  import { createEventDispatcher } from 'svelte';
-  const dispatch = createEventDispatcher();
+
   let cssClass = '';
+
   export let href = '/';
   export let className = '';
   export let title = '';
@@ -12,11 +12,21 @@
   onMount(() => {
     className = className || cssClass;
   });
-  
-  function onClick() {
-      dispatch('click');
-      navigateTo(href);
+
+  const dispatch = createEventDispatcher();
+
+  // this will enable `<Link on:click={...} />` calls
+  function onClick(e) {
+    let fixedHref = href;
+
+    // this will rebase anchors to avoid location changes
+    if (fixedHref.charAt() !== '/') {
+      fixedHref = window.location.pathname + fixedHref;
+    }
+
+    navigateTo(fixedHref);
+    dispatch('click', e);
   }
 </script>
 
-<a href={href} class={className} on:click|preventDefault={onClick}><slot></slot></a>
+<a {href} class={className} on:click|preventDefault={onClick}><slot></slot></a>

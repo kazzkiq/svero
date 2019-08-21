@@ -106,7 +106,7 @@
     
     }else {//This is else if server through web server..
       fullpath = cleanPath(`/${location.href.split('/').slice(3).join('/')}`);
-      fullpath = (fullpath) ? fullpath : "*"; //If is empty this is to return default route...
+      
    }
    
 

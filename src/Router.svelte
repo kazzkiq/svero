@@ -94,18 +94,18 @@
 
     //this if statement will handle for electron apps using the file instead of http.
     //svero won't work like this..
-    let fullpath = ""; //First declare variable
+    
     if(location.href.includes("file")) { 
        //If is a file then do something different.
       //Only use hash tags routes can be done different let me know.
 
-        fullpath = cleanPath(`/${location.href.split('index.html').slice(1).join('/').replace(".", "")}`);
+        const fullpath = cleanPath(`/${location.href.split('index.html').slice(1).join('/').replace(".", "")}`);
 
           //Fix if returns empty string...
         fullpath = (fullpath) ? fullpath : cleanPath(`/${location.href.split('/').slice(3).join('/')}`);
     
     }else {//This is else if server through web server..
-      fullpath = cleanPath(`/${location.href.split('/').slice(3).join('/')}`);
+      const fullpath = cleanPath(`/${location.href.split('/').slice(3).join('/')}`);
       
    }
    

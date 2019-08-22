@@ -29,4 +29,4 @@
   }
 </script>
 
-<a {href} class={className} on:click|preventDefault={onClick}><slot></slot></a>
+<a {href} class={className} title={title} on:click|preventDefault={onClick}><slot></slot></a>

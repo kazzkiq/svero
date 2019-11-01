@@ -45,4 +45,17 @@ module.exports = {
       .assert.containsText('fieldset', '[...] {"value":"something"}')
       .end();
   },
+  '<Router> can hold routes with nested segments': (browser) => {
+    browser
+      .url('http://localhost:5001/directory/trademark/create')
+      .waitForElementVisible('body h4')
+      .assert.containsText('body h4', 'CreateTrademark')
+      .url('http://localhost:5001/directory/trademark/update')
+      .waitForElementVisible('body h4')
+      .assert.containsText('body h4', 'UpdateTrademark')
+      .url('http://localhost:5001/directory/embroidery/create')
+      .waitForElementVisible('body h4')
+      .assert.containsText('body h4', 'CreateEmbroidery')
+      .end();
+  },
 };

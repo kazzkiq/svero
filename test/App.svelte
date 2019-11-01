@@ -5,6 +5,14 @@
   import User from './User.svelte';
 </script>
 
+<Router path="/directory">
+  <h4>
+    <Route path="/embroidery/create">CreateEmbroidery</Route>
+    <Route path="/trademark/update">UpdateTrademark</Route>
+    <Route path="/trademark/create">CreateTrademark</Route>
+  </h4>
+</Router>
+
 <main>
   <Router>
     <Route fallback path="*"><h1>Not found</h1></Route>

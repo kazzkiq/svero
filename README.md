@@ -215,3 +215,19 @@ Usage:
   });
 </script>
 ```
+
+### Webpack issues
+
+If you're having trouble with Webpack failing to load svero, please replace the following rule (in Svelte rule):
+
+```js
+exclude: /node_modules/,
+```
+
+with:
+
+```js
+exclude: /node_modules\/(?!(svero)\/).*/,
+```
+
+More information [here](https://github.com/kazzkiq/svero/issues/23).

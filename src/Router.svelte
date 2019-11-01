@@ -72,6 +72,8 @@
     const prefix = [];
     const map = [];
 
+    let hasExact = false;
+
     segments.forEach(key => {
       const sub = prefix.concat(`/${key}`).join('');
 
@@ -80,9 +82,14 @@
       try {
         const next = router.find(sub);
 
+        hasExact = next.some(x => x.exact);
+
         handleRoutes(next);
         map.push(...next);
       } catch (e_) {
+        // clear current state on exact-routes
+        if (hasExact) $routeInfo = {};
+
         doFallback(e_, path);
       }
     });

@@ -6,6 +6,7 @@
   export let path = '';
   export let props = null;
   export let exact = undefined;
+  export let nested = undefined;
   export let fallback = undefined;
   export let component = undefined;
   export let condition = undefined;
@@ -31,7 +32,7 @@
     };
   }
 
-  [key, fullpath] = assignRoute(key, path, { condition, redirect, fallback, exact });
+  [key, fullpath] = assignRoute(key, path, { condition, redirect, fallback, nested, exact });
 
   $: {
     activeRouter = $routeInfo[key];

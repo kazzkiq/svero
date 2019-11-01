@@ -11,7 +11,7 @@
     <Route exact path="/" component={Index} />
     <Route path="/company" redirect="/about" />
     <Route path="/about" description="Company and such." component={About} />
-    <Route path="/user/:name/:age" component={User} />
+    <Route path="/user/:name/:age" nested component={User} />
     <Route path="/admin-false" condition={false} component={User} redirect="/" />
     <Route path="/admin-true" condition={true} component={User} redirect="/" />
     <Route path="/slot"><h3>It works!</h3></Route>
@@ -50,7 +50,7 @@
           [...]
           <Route fallback path="*">not found?</Route>
           <Route path="/a">A</Route>
-          <Route path="/b/:c">C</Route>
+          <Route path="/b/:c" nested>C</Route>
           <Route path="/:value" let:router>{JSON.stringify(router.params)}</Route>
         </Route>
       </Router>

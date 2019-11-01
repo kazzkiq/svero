@@ -152,6 +152,7 @@ Properties determine how routing will match and render routes:
 - Use the `nofallback` prop for telling `<Router />` to disable the _fallback_ mechanism by default
 - Any route using the `fallback` prop will catch unmatched routes or potential look-up errors
 - Use the `exact` prop to skip this route from render just in case it does not matches
+- Use `nested` if the route is meant to render the same component on matched segments
 - A `<Route />` without `path` will render only if `<Router path="..." />` is active!
 
 > Note that all `<Router />` paths MUST begin from the root as `/sub` and `/sub/nested` in the example.

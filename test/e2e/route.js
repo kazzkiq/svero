@@ -85,8 +85,6 @@ module.exports = {
   '<Route> hash-based paths can all catch-all': (browser) => {
     browser
       .url('http://localhost:5001/#whatever')
-      .waitForElementVisible('h1')
-      .assert.containsText('h1', 'Hello from Index!')
       .waitForElementVisible('p')
       .assert.containsText('p', 'Anchored. whatever')
       .end();

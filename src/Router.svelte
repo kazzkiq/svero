@@ -15,6 +15,7 @@
 
   export let path = '/';
   export let nofallback = null;
+  export let exact = false;
 
   const routeInfo = writable({});
   const routerContext = getContext(CTX_ROUTER);

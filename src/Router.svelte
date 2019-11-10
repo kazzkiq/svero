@@ -1,37 +1,32 @@
 <script context="module">
-  import Router from "abstract-nested-router";
-  import { CTX_ROUTER, navigateTo } from "./utils";
+  import Router from 'abstract-nested-router';
+  import { CTX_ROUTER, navigateTo } from './utils';
 
   const router = new Router();
 </script>
 
 <script>
-  import { writable } from "svelte/store";
-  import { onMount, getContext, setContext } from "svelte";
+  import { writable } from 'svelte/store';
+  import { onMount, getContext, setContext } from 'svelte';
 
   let t;
   let failure;
   let fallback;
 
-  export let path = "/";
+  export let path = '/';
   export let nofallback = null;
-  export let exact = false;
 
   const routeInfo = writable({});
   const routerContext = getContext(CTX_ROUTER);
   const basePath = routerContext ? routerContext.basePath : writable(path);
 
   function cleanPath(route) {
-    return route
-      .replace(/\?[^#]*/, "")
-      .replace(/(?!^)\/#/, "#")
-      .replace("/#", "#")
-      .replace(/\/$/, "");
+    return route.replace(/\?[^#]*/, '').replace(/(?!^)\/#/, '#').replace('/#', '#').replace(/\/$/, '');
   }
 
   function fixPath(route) {
-    if (route === "/#*" || route === "#*") return "#*_";
-    if (route === "/*" || route === "*") return "/*_";
+    if (route === '/#*' || route === '#*') return '#*_';
+    if (route === '/*' || route === '*') return '/*_';
     return route;
   }
 
@@ -45,12 +40,8 @@
     let routes = {};
 
     map.some(x => {
-      if (
-        typeof x.condition === "boolean" ||
-        typeof x.condition === "function"
-      ) {
-        const ok =
-          typeof x.condition === "function" ? x.condition() : x.condition;
+      if (typeof x.condition === 'boolean' || typeof x.condition === 'function') {
+        const ok = typeof x.condition === 'function' ? x.condition() : x.condition;
 
         if (ok === false && x.redirect) {
           navigateTo(x.redirect);
@@ -73,19 +64,16 @@
   }
 
   function doFallback(e, path) {
-    $routeInfo[fallback] = {
-      failure: e,
-      params: { _: path.substr(1) || undefined }
-    };
+    $routeInfo[fallback] = { failure: e, params: { _: path.substr(1) || undefined } };
   }
 
   function resolveRoutes(path) {
-    const segments = path.split("#")[0].split("/");
+    const segments = path.split('#')[0].split('/');
     const prefix = [];
     const map = [];
 
     segments.forEach(key => {
-      const sub = prefix.concat(`/${key}`).join("");
+      const sub = prefix.concat(`/${key}`).join('');
 
       if (key) prefix.push(`/${key}`);
 
@@ -103,32 +91,25 @@
   }
 
   function handlePopState() {
-    const fullpath = cleanPath(
-      `/${location.href
-        .split("/")
-        .slice(3)
-        .join("/")}`
-    );
+    const fullpath = cleanPath(`/${location.href.split('/').slice(3).join('/')}`);
 
     try {
       const found = resolveRoutes(fullpath);
 
-      if (fullpath.includes("#")) {
+      if (fullpath.includes('#')) {
         const next = router.find(fullpath);
         const keys = {};
 
         // override previous routes to avoid non-exact matches
-        handleRoutes(
-          found.concat(next).reduce((prev, cur) => {
-            if (typeof keys[cur.key] === "undefined") {
-              keys[cur.key] = prev.length;
-            }
+        handleRoutes(found.concat(next).reduce((prev, cur) => {
+          if (typeof keys[cur.key] === 'undefined') {
+            keys[cur.key] = prev.length;
+          }
 
-            prev[keys[cur.key]] = cur;
+          prev[keys[cur.key]] = cur;
 
-            return prev;
-          }, [])
-        );
+          return prev;
+        }, []));
       }
     } catch (e) {
       if (!fallback) {
@@ -146,19 +127,16 @@
   }
 
   function assignRoute(key, route, detail) {
-    key =
-      key ||
-      Math.random()
-        .toString(36)
-        .substr(2);
+    key = key || Math.random().toString(36).substr(2);
 
-    const fixedRoot =
-      $basePath !== path && $basePath !== "/" ? `${$basePath}${path}` : path;
+    const fixedRoot = $basePath !== path && $basePath !== '/'
+      ? `${$basePath}${path}`
+      : path;
 
     if (exact) {
       detail.exact = true;
     }
-
+    
     const handler = { key, ...detail };
 
     let fullpath;
@@ -182,11 +160,11 @@
     basePath,
     routeInfo,
     assignRoute,
-    unassignRoute
+    unassignRoute,
   });
 </script>
 
-<svelte:window on:popstate={handlePopState} />
+<svelte:window on:popstate={handlePopState}></svelte:window>
 
 {#if failure && !nofallback}
   <fieldset>

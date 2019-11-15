@@ -35,7 +35,7 @@
 
   $: {
     activeRouter = $routeInfo[key];
-    activeProps = getProps($$props, arguments[0]['$$'].props);
+    activeProps = getProps($$props, Object.keys(arguments[0]['$$'].props));
   }
 
   onDestroy(() => {

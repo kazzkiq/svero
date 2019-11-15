@@ -1,6 +1,6 @@
 {
   "name": "@c0ldra1n/svero",
-  "version": "1.0.0-2",
+  "version": "1.0.0-3",
   "description": "Simple Router for Svelte 3",
   "main": "dist/svero.js",
   "svelte": "src/main.js",

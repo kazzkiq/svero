@@ -20,6 +20,10 @@
   function getProps(given, required) {
     const { props, ...others } = given;
 
+    // Fix(#62):https://github.com/kazzkiq/svero/issues/62
+    // Err: required.ForEach is not a function
+    required = typeof required === 'object' ? Object.keys(required) : required;
+
     // prune all declared props from this component
     required.forEach(k => {
       delete others[k];

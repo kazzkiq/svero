@@ -2,16 +2,7 @@
   import { onMount, createEventDispatcher } from 'svelte';
   import { navigateTo } from './utils';
 
-  let cssClass = '';
-
   export let href = '/';
-  export let className = '';
-  export let title = '';
-  export { cssClass as class };
-
-  onMount(() => {
-    className = className || cssClass;
-  });
 
   const dispatch = createEventDispatcher();
 
@@ -29,4 +20,6 @@
   }
 </script>
 
-<a {href} class={className} title={title} on:click|preventDefault={onClick}><slot></slot></a>
+<a {href} {...$$props} on:click|preventDefault={onClick}>
+  <slot></slot>
+</a>

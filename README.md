@@ -1,3 +1,15 @@
+⚠️⚠️ THIS LIBRARY IS DEPRECATED AND SHOULD NOT BE USED IN NEW PROJECTS ⚠️⚠️
+
+⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
+<br>⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
+
+⚠️⚠️ MORE DETAILS [HERE](https://github.com/kazzkiq/svero/issues/68). ⚠️⚠️
+
+⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
+<br>⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
+
+
+
 [![npm version](https://badge.fury.io/js/svero.svg)](https://www.npmjs.com/package/svero)
 [![Build Status](https://travis-ci.org/kazzkiq/svero.svg?branch=master)](https://travis-ci.org/kazzkiq/svero)
 
